@@ -2,12 +2,9 @@ import { Visitor } from './visitor';
 
 export class Store {
     
-    guid: string;
-    storeUid: string;
-
-    storename: string;
-    
-    visitors: Visitor[];
+    id: number;
+    name: string;
+    //visitors: Visitor[];
 
 
     constructor(obj: any = null) {
@@ -15,8 +12,5 @@ export class Store {
             Object.assign(this, obj);
         }
         
-    }
-    addVisitor(visitor: Visitor): void {
-             this.visitors.push(visitor);
     }
 }

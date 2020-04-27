@@ -1,7 +1,5 @@
 export class Visitor {
-    guid: string;
-    visitorUid: string;
-
+    visitorId: string;
     first_name: string;
     last_name: string;
     phone_number: string;

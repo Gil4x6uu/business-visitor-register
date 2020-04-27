@@ -1,38 +1,44 @@
-
 const express = require('express');
-const path = require('path');
-const http = require('http');
-const bodyParser = require('body-parser');
-
-/**
- * We create the app variable and initialize it to be an Express Application
- */
 const app = express();
+const bodyParser = require('body-parser');
+const port = process.env.PORT || '3000';
+const cors = require('cors');
 
-// body parser is quite detailed so read the following article to understand how it works.
-// Understanding how Body Parser works : https://medium.com/@adamzerner/how-bodyparser-works-247897a93b90
+app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 
-// Point to static path to dist
-// __dirname is retrieved from javascript as the directory name of the location of this file.
-// which should be ~/Angular-CLI-Fullstack
-app.use(express.static(path.join(__dirname, 'dist')));
+let store;
+let stores = [
+    { id: '11', name: 'Dr Nice' },
+    { id: 12, name: 'Narco' },
+    { id: 13, name: 'Bombasto' },
+    { id: 14, name: 'Celeritas' },
+    { id: 15, name: 'Magneta' },
+    { id: 16, name: 'RubberMan' },
+    { id: 17, name: 'Dynama' },
+    { id: 18, name: 'Dr IQ' },
+    { id: 19, name: 'Magma' },
+    { id: 20, name: 'Tornado' }
+]; 
 
-/**
- * Here we make a variable Routes equal to the routes.js file located in the server folder.
- * In the routes.js file we will make a function that returns all routes for the entire application
- * We then call the function in the Routes variable, giving it the express app variable and __dirname
- */
-const Routes = require('./server/routes'); // Import all route endpoints
-Routes(app, __dirname);
 
-// Get port from environment and store in Express
-const port = process.env.PORT || '3000';
-app.set('port', port);
 
-// CREATE HTTP SERVER
-const server = http.createServer(app);
+//return the stores
+app.get('/getStores', (req, res) => {
+    console.log('inside serevr: getStores')
+    res.send(stores);
+});
+
+app.get('/getStoresById', (req, res) => {
+    console.log(`inside serevr: getStoresById - req.body.id  = ${req.query.id}`);
+    store = stores.find((store) =>store.id == req.query.id);
+    res.send(store);
+});
+
 
 // LISTEN ON PORT
-server.listen(port, () => console.log(`API RUNNING ON LOCALHOST: ${port}`));
+app.listen(port, () => 
+console.log(`API RUNNING ON LOCALHOST: ${port}`)
+);

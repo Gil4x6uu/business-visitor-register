@@ -1,0 +1,14 @@
+
+  <label class="label-info">Enter StoreID</label>
+  <input #storeId type="text"  class="form-control" placeholder="Store ID">
+  <button type="submit" class="btn btn-primary" (click)="getStoreById(storeId.value)">
+  CHECK IN
+  </button>
+  
+<div *ngIf="store">
+  <h2>{{store.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{store.id}}</div>
+</div>
+
+ 
+

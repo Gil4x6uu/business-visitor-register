@@ -1,17 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
+
+import { Store } from '../models/store';
 
 @Component({
   selector: 'app-visitores-form',
   templateUrl: './visitores-form.component.html',
   styleUrls: ['./visitores-form.component.css']
 })
+
+
+
 export class VisitoresFormComponent implements OnInit {
   registered = false;
   submitted = false;
   userForm: FormGroup;
+  store:Store;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute) {
 
   }
 
@@ -32,12 +40,14 @@ export class VisitoresFormComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.userForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')]],
       email: ['', [Validators.required, Validators.email]],
     });
+    
   }
 
   onSubmit() {
