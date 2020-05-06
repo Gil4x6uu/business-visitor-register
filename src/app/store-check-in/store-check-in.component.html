@@ -8,6 +8,11 @@
 <div *ngIf="store">
   <h2>{{store.name | uppercase}} Details</h2>
   <div><span>id: </span>{{store.id}}</div>
+  <app-visitores-form
+  [storeToUpdate] = 'store'
+  >
+    
+  </app-visitores-form>
 </div>
 
  

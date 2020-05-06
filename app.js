@@ -9,36 +9,59 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-let store;
-let stores = [
-    { id: '11', name: 'Dr Nice' },
-    { id: 12, name: 'Narco' },
-    { id: 13, name: 'Bombasto' },
-    { id: 14, name: 'Celeritas' },
-    { id: 15, name: 'Magneta' },
-    { id: 16, name: 'RubberMan' },
-    { id: 17, name: 'Dynama' },
-    { id: 18, name: 'Dr IQ' },
-    { id: 19, name: 'Magma' },
-    { id: 20, name: 'Tornado' }
-]; 
+const assert = require('assert');
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://gil4x6uu:e3p2M!D8b46YHNF@cluster0-tudov.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+let db;
+client.connect(function (err) {
+    assert.equal(null, err);
+    console.log("Connected successfully to server");
+
+    db = client.db("stores");
+});
 
 
+function getAllStores() {
+    const collection = client.db("stores").collection('storesDeatails');
+    // Find some documents
+    collection.find({}).toArray(function (err, docs) {
+        assert.equal(err, null);
+        console.log("Found the following records");
+        console.log(docs)
+        return docs;
+    });
+}
 
 //return the stores
 app.get('/getStores', (req, res) => {
-    console.log('inside serevr: getStores')
-    res.send(stores);
+    getAllStores()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 });
 
 app.get('/getStoresById', (req, res) => {
-    console.log(`inside serevr: getStoresById - req.body.id  = ${req.query.id}`);
-    store = stores.find((store) =>store.id == req.query.id);
-    res.send(store);
+    const collection = db.collection('storesDeatails');
+    collection.find({ 'id': Number(req.query.id) }).toArray((err, store) => {   
+        res.send(store);
+        })
+});
+
+app.post('/addVisitorToStore',(req, res) => {
+    const collection = db.collection('storesDeatails');
+    collection.update({ id: req.body.storeId }, { $push: { visitores: req.body.visitor } },(err, message) =>{
+        res.send(message)
+    })
+    
 });
 
 
+
 // LISTEN ON PORT
-app.listen(port, () => 
-console.log(`API RUNNING ON LOCALHOST: ${port}`)
+app.listen(port, () =>
+    console.log(`API RUNNING ON LOCALHOST: ${port}`)
 );

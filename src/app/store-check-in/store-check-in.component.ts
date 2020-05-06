@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StoreService} from  '../store.service'
 import { Store } from '../models/store';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./store-check-in.component.css']
 })
 export class StoreCheckInComponent implements OnInit {
-  @Input() store: Store;
+  store: Store;
   stores: Store[];
   constructor(
     private storeService: StoreService,
@@ -26,13 +26,18 @@ export class StoreCheckInComponent implements OnInit {
     this.storeService.getStores()
       .subscribe(stores => this.stores = stores);
    }
-  getStoreById(id: string): void{
+   
+  getStoreById(id: Number): void{
      this.storeService.getStoreById(id)
     .subscribe(store =>{
-      this.store = store; 
-      console.log(this.store)
-    })
-    
+      this.store = store[0]; 
+    }) 
+  }
+  
+  isStoreExicst(): void{
+    if(this.store){
+      
+    }
   }
    
   ngOnInit() {

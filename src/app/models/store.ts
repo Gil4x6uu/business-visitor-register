@@ -2,9 +2,10 @@ import { Visitor } from './visitor';
 
 export class Store {
     
+    _id: number;
     id: number;
     name: string;
-    //visitors: Visitor[];
+    visitors: Visitor[];
 
 
     constructor(obj: any = null) {

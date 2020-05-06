@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 
 import { Store } from '../models/store';
+import { Visitor } from '../models/visitor';
+import { StoreService } from '../store.service';
 
 @Component({
   selector: 'app-visitores-form',
@@ -17,9 +19,11 @@ export class VisitoresFormComponent implements OnInit {
   registered = false;
   submitted = false;
   userForm: FormGroup;
-  store:Store;
+  visitorInfo: Visitor;
+  todayTime : Date;
+  @Input() storeToUpdate: Store;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private storeService: StoreService) {
 
   }
 
@@ -44,7 +48,7 @@ export class VisitoresFormComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{5}(?:-[0-9]{4})?$')]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{3}(?:-[0-9]{7})?$')]],
       email: ['', [Validators.required, Validators.email]],
     });
     
@@ -58,6 +62,10 @@ export class VisitoresFormComponent implements OnInit {
     }
     else {
       this.registered = true;
+      this.visitorInfo = new Visitor(this.userForm.value);
+      this.visitorInfo.time = new Date().toLocaleString();
+      this.storeService.addVisitoreToStore(this.visitorInfo, this.storeToUpdate.id)
+      .subscribe(message =>console.log(message));
     }
   }
 

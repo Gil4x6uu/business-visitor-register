@@ -3,6 +3,7 @@ import { Store } from './models/store';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Visitor } from './models/visitor';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ constructor(
 ) { }
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' },)
+    headers: new HttpHeaders({ 'Content-Type': 'text' },)
   };
   
   
@@ -31,13 +32,24 @@ constructor(
       );
   }
   
-    getStoreById(id: string): Observable<Store>{
-      const params =  new HttpParams().set('id' , id);
+    getStoreById(id: Number): Observable<Store>{
+      const params =  new HttpParams().set('id' , id.toString());
       return this.http.get<Store>(`${this.storeUrl}/getStoresById`, {params})
       .pipe(
         tap(_ => console.log('fetched Store by ID')),
         catchError(this.handleError<Store>('getStoresById/:' + id))
       );
+  }
+  
+  
+  
+  addVisitoreToStore(visitor: Visitor, storeId: Number): Observable<Store> {
+
+    return this.http.post<Store>(`${this.storeUrl}/addVisitorToStore`, {'visitor':visitor, 'storeId': storeId})
+    .pipe(
+      tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),
+      catchError(this.handleError<Store>('addVisitorToStore: ' + visitor._id))
+    );     
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
