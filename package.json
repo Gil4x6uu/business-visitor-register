@@ -19,8 +19,11 @@
     "@angular/platform-browser": "~9.0.7",
     "@angular/platform-browser-dynamic": "~9.0.7",
     "@angular/router": "~9.0.7",
+    "angular-6-social-login": "^1.1.1",
+    "angularx-social-login": "^2.3.1",
     "bootstrap": "^3.4.1",
     "cors": "^2.8.5",
+    "googleapis": "^51.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

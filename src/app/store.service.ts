@@ -4,6 +4,7 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Visitor } from './models/visitor';
+import { StoreOwner } from './models/socialUser';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +33,12 @@ constructor(
       );
   }
   
-    getStoreById(id: Number): Observable<Store>{
+  getStoreById(id: Number): Observable<StoreOwner>{
       const params =  new HttpParams().set('id' , id.toString());
-      return this.http.get<Store>(`${this.storeUrl}/getStoresById`, {params})
+    return this.http.get<StoreOwner>(`${this.storeUrl}/getStoresById`, {params})
       .pipe(
         tap(_ => console.log('fetched Store by ID')),
-        catchError(this.handleError<Store>('getStoresById/:' + id))
+        catchError(this.handleError<StoreOwner>('getStoresById/:' + id))
       );
   }
   
