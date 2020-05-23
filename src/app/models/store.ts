@@ -4,7 +4,7 @@ export class Store {
     
     _id: number;
     id: number;
-    name: string;
+    store_name: string;
     visitors: Visitor[];
 
 

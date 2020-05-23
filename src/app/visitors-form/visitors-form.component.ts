@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+
 
 
 import { Store } from '../models/store';
@@ -8,20 +8,22 @@ import { Visitor } from '../models/visitor';
 import { StoreService } from '../store.service';
 
 @Component({
-  selector: 'app-visitores-form',
-  templateUrl: './visitores-form.component.html',
-  styleUrls: ['./visitores-form.component.css']
+  selector: 'app-visitors-form',
+  templateUrl: './visitors-form.component.html',
+  styleUrls: ['./visitors-form.component.css']
 })
 
 
 
-export class VisitoresFormComponent implements OnInit {
+export class VisitorsFormComponent implements OnInit {
   registered = false;
   submitted = false;
   userForm: FormGroup;
   visitorInfo: Visitor;
   todayTime : Date;
   @Input() storeToUpdate: Store;
+  @Output() storeToUpdateChange = new EventEmitter<Store>();
+  
 
   constructor(private formBuilder: FormBuilder, private storeService: StoreService) {
 
@@ -41,7 +43,10 @@ export class VisitoresFormComponent implements OnInit {
   invalidPhone() {
     return (this.submitted && this.userForm.controls.phone.errors != null);
   }
-
+  
+  goBackToCheckInForm(){
+    this.storeToUpdateChange.emit(null);
+  }
 
   ngOnInit() {
     
@@ -61,11 +66,14 @@ export class VisitoresFormComponent implements OnInit {
       return;
     }
     else {
-      this.registered = true;
+      //this.registered = true;
       this.visitorInfo = new Visitor(this.userForm.value);
       this.visitorInfo.time = new Date().toLocaleString();
       this.storeService.addVisitoreToStore(this.visitorInfo, this.storeToUpdate.id)
-      .subscribe(message =>console.log(message));
+      .subscribe(message =>{
+        console.log( `inside onSubmit in visitor form ${message}`);
+        this.storeToUpdateChange.emit(null);
+      });
     }
   }
 

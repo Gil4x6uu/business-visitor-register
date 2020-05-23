@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StoreCheckInComponent } from './store-check-in/store-check-in.component';
-import { VisitoresFormComponent } from './visitores-form/visitores-form.component';
+import { VisitorsFormComponent } from './visitors-form/visitors-form.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MainScreenComponent} from './main-screen/main-screen.component'
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
       title: 'Dashboard Page'
     }
   },
+  {
+    path: 'mainScreen',
+    component: MainScreenComponent
+  },
 
   { 
     path: 'checkIn', 
@@ -20,11 +25,11 @@ const routes: Routes = [
   },
   { 
     path: 'visitor-form/:id', 
-    component: VisitoresFormComponent 
+    component: VisitorsFormComponent 
   },
   { 
     path: '', 
-    redirectTo: '/login', 
+    redirectTo: '/mainScreen', 
     pathMatch: 'full' 
   },
   {

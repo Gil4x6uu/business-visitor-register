@@ -4,12 +4,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VisitoresFormComponent } from './visitores-form/visitores-form.component';
-import { EnterTokenScreenComponent } from './enter-token-screen/enter-token-screen.component';
+import { VisitorsFormComponent } from './visitors-form/visitors-form.component';
 import { StoreCheckInComponent } from './store-check-in/store-check-in.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MainScreenComponent} from './main-screen/main-screen.component';
 
 
 import { GoogleLoginProvider, FacebookLoginProvider, AuthService } from 'angularx-social-login';
@@ -34,11 +34,11 @@ export function socialConfigs() {
 @NgModule({
    declarations: [
       AppComponent,
-      VisitoresFormComponent,
-      EnterTokenScreenComponent,
+      VisitorsFormComponent,
       StoreCheckInComponent,
       LoginComponent,
-      DashboardComponent
+      DashboardComponent,
+      MainScreenComponent
    ],
    imports: [
       BrowserModule,

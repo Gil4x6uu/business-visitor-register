@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StoreOwner} from './models/socialUser';
+import { StoreOwner} from './models/storeOwner';
 import { Observable } from 'rxjs';
 
 @Injectable({

@@ -4,7 +4,7 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Visitor } from './models/visitor';
-import { StoreOwner } from './models/socialUser';
+import { StoreOwner } from './models/storeOwner';
 
 @Injectable({
   providedIn: 'root'

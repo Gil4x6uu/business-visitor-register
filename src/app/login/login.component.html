@@ -1,49 +1,29 @@
-<div class="container" style="padding-top:60px;">
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <div class="card-group">
-        <div class="card p-4">
-          <div class="card-body">
-            <form name="form">
-              <div style="padding-top: 20px;" class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-user"></i></span>
-                </div>
-                <input type="text" name="UserName" class="form-control sty1" placeholder="Email" required>
-              </div>
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="icon-lock"></i></span>
-                </div>
-                <input type="password" name="Passward" class="form-control" placeholder="Password">
-              </div>
-              <div>
-                <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
-                   </p>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <button type="submit" class="btn btn-primary px-4">Login</button>
-                </div>
-                <div class="col-6 text-right">
-                  <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                </div>
-              </div>
-            </form>
-            <div class="col-6">
-            <button (click)="socialSignIn('google')" class="loginBtn loginBtn--google"> Login with Google </button>
-            </div>
-            <hr style="border-top: 1px solid #eee;">
-            <div class="row">
-              <div class="col-6">
-                <button (click)="socialSignIn('facebook')" class="loginBtn loginBtn--facebook"> Login with Facebook
-                </button>
-              </div>
+<div class="container-fluid">
 
-            </div>
-          </div>
-        </div>
+  <body class='text-center'>
+    <h1 class="h3 mb-3 font-weight-normal">Sign In With</h1>
+    <div class="form-group">
+      <button (click)="socialSignIn('google')"  type="button" class="btn btn-default">
+          <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+          Login with Google 
+       </button>
+    </div> OR 
+    
+    <form class="form-signin">
+      <img class="mb-4" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me </label>
       </div>
-    </div>
-  </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" disabled>Sign in</button>
+      <p class="mt-5 mb-3 text-muted">© 2020</p>
+    </form>
+  </body>
 </div>
+

@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { GoogleLoginProvider, FacebookLoginProvider, AuthService, SocialUser } from 'angularx-social-login';
 import { SocialloginService } from '../social-sign-in.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { StoreOwner } from '../models/socialUser';
+import { StoreOwner } from '../models/storeOwner';
+import { Store } from '../models/store';
+
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,7 @@ import { StoreOwner } from '../models/socialUser';
 export class LoginComponent implements OnInit {
   response;
   storeOwner = new StoreOwner();
+  store = new Store();
   
   constructor(
     public OAuth: AuthService,
@@ -22,6 +25,7 @@ export class LoginComponent implements OnInit {
   ) { }
   
   ngOnInit() {
+
   }
   
   
@@ -36,9 +40,10 @@ export class LoginComponent implements OnInit {
     this.SocialloginService.Savesresponse(storeOwner).subscribe((res: any) => {
       
       console.log('result return from server: '+ res);
-      this.storeOwner = res;
+      this.storeOwner = res[0];
+      this.store = res[1];
       localStorage.setItem('storeOwner', JSON.stringify(this.storeOwner));
-      console.log(localStorage.setItem('storeOwner', JSON.stringify(this.storeOwner)));
+      localStorage.setItem('store', JSON.stringify(this.store));
       this.router.navigate([`dashboard`]);
     })
   }

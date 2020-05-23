@@ -2,9 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { StoreService} from  '../store.service'
 import { Store } from '../models/store';
 import { ActivatedRoute, Router } from '@angular/router';
-
-
-
+import { FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-store-check-in',
   templateUrl: './store-check-in.component.html',
@@ -13,14 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class StoreCheckInComponent implements OnInit {
   store: Store;
   stores: Store[];
+  storeIdForm: FormGroup;
   constructor(
     private storeService: StoreService,
     private route: ActivatedRoute,
     ) {}
    
-   clearInput(event):void{
-     event.target.value = "";
-   } 
+
   
   getStores(): void {
     this.storeService.getStores()
@@ -30,7 +27,7 @@ export class StoreCheckInComponent implements OnInit {
   getStoreById(id: Number): void{
      this.storeService.getStoreById(id)
     .subscribe(store =>{
-      this.store = store[0]; 
+      this.store = store[0];
     }) 
   }
   

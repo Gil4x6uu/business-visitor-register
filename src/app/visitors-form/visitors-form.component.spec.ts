@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EnterTokenScreenComponent } from './enter-token-screen.component';
+import { VisitorsFormComponent } from './visitores-form.component';
 
-describe('EnterTokenScreenComponent', () => {
-  let component: EnterTokenScreenComponent;
-  let fixture: ComponentFixture<EnterTokenScreenComponent>;
+describe('VisitoresFormComponent', () => {
+  let component: VisitorsFormComponent;
+  let fixture: ComponentFixture<VisitorsFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnterTokenScreenComponent ]
+      declarations: [ VisitorsFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EnterTokenScreenComponent);
+    fixture = TestBed.createComponent(VisitorsFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -60,7 +60,7 @@ app.get('/getStoresById', (req, res) => {
 
 app.post('/addVisitorToStore', (req, res) => {
     const collection = db.collection('storesDeatails');
-    collection.update({ id: req.body.storeId }, { $push: { visitores: req.body.visitor } }, (err, message) => {
+    collection.update({ id: req.body.storeId }, { $push: { visitors: req.body.visitor } }, (err, message) => {
         res.send(message)
     })
 
@@ -68,26 +68,39 @@ app.post('/addVisitorToStore', (req, res) => {
 
 
 app.post('/Login/Savesresponse', (req, res) => {
-    const collection = db.collection('storeOwners');
+    const storeOwnersCollection = db.collection('storeOwners');
+    const storesDeatailsCollection = db.collection('storesDeatails');
     validateTokenAndGetGoogleUserInfo({ access_token: req.body.authToken })
-        .then((result) => {
-            if (result.status == 200) {
-                collection.findOne({ id: result.data.id })
+        .then((googleResult) => {
+            if (googleResult.status == 200) {
+                storeOwnersCollection.findOne({ id: googleResult.data.id })
                     .then((doc) => {
                         if (!doc) {
-                            newDoc = result.data;
-                            newDoc.store_name = `${result.data.given_name }s stroe`;
-                            newDoc.visitores = [];
-                            collection.insertOne(newDoc);
-                            res.send(newDoc);
+                            userDoc = googleResult.data;
+                            storesDeatailsCollection.countDocuments({})
+                                .then((countResult) => {
+                                    userDoc.store_id = countResult+1;
+                                    storeOwnersCollection.insertOne(userDoc);
+                                    storeDoc = {};
+                                    storeDoc.id = userDoc.store_id;
+                                    storeDoc.store_name = `${userDoc.given_name}s store`;
+                                    storeDoc.visitors = [];
+                                    storesDeatailsCollection.insertOne(storeDoc);
+                                    res.send([userDoc, storeDoc]);
+                                })
+
+
                         }
-                        else{
-                            res.send(doc);
+                        else {
+                            storesDeatailsCollection.findOne({ id: doc.store_id })
+                                .then((storeDoc) => {
+                                    res.send([doc, storeDoc]);
+                                });
                         }
                     })
-                }
-            })
-        });
+            }
+        })
+});
 
 
 

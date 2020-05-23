@@ -1,19 +1,21 @@
-
-  <label class="label-info">Enter StoreID</label>
-  <input #storeId type="text"  class="form-control" placeholder="Store ID">
-  <button type="submit" class="btn btn-primary" (click)="getStoreById(storeId.value)">
-  CHECK IN
-  </button>
-  
-<div *ngIf="store">
-  <h2>{{store.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{store.id}}</div>
-  <app-visitores-form
-  [storeToUpdate] = 'store'
-  >
-    
-  </app-visitores-form>
+<div *ngIf="!store">
+<form [formGroup]="storeIdForm"  class='text-center'>
+  <div class="form-group">
+    <h2>Check in to store with store ID</h2>
+  </div>
+  <div class="form-group">
+    <input #storeId type="text" class="form-control" placeholder="Store ID">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary px-4" (click)="getStoreById(storeId.value)"> Check </button>
+  </div>
+</form>
 </div>
 
- 
 
+<div *ngIf="store" >
+  
+  <h2  class='text-center' aria-atomic="true">{{store.store_name}} check in form</h2>
+  <app-visitors-form [(storeToUpdate)]='store'>
+  </app-visitors-form >
+</div>
