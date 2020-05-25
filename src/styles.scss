@@ -1,0 +1,27 @@
+// Import the IgniteUI themes library first
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+$primary-color: #030c5a;
+$secondary-color: #ffffff; 
+
+$my-color-palette: igx-palette(
+    $primary: $primary-color,
+    $secondary: $secondary-color
+);
+.light-theme {
+    @include igx-light-theme($default-palette);
+}
+
+.dark-theme {
+    background: #333;
+    color: #fff;
+
+    @include igx-dark-theme($default-palette);
+}
+
+
+// IMPORTANT: Make sure you always include igx-core first!
+@include igx-core();
+// Pass the color palette we generated to the igx-bootstrap-theme mixin
+@include igx-bootstrap-theme($my-color-palette);
+

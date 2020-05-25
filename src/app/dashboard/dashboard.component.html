@@ -2,51 +2,49 @@
   <div class=" container-fluid">
     <div class="row">
       <div class="col-sm-2">
-        <form class="logout">
-          <button (click)="logout()" class="btn btn-outline-success my-2 my-sm-0">Logout</button>
-          <img src={{storeOwner.picture}} class="img-fluid" width="40">
-        </form>
+        <igx-avatar [src]="storeOwner.picture" roundShape="true" size="large"></igx-avatar>
+        <div class="logout">
+          <span igxButton="outlined" (click)="logout()">Sign Out </span>
+        </div>
       </div>
       <div class="col-sm-8">
-        <div class="card border-primary mb-3">
-          <h2 class="card-header"> Visitors list </h2>
-          <div class="card-body">
-            <div class="table table-bordered">
-              <table class="table table-hover table-dark">
-                <thead>
-                  <tr>
-                    <th class="text-center">#</th>
-                    <th>Name</th>
-                    <th class="text-center">Phone</th>
-                    <th class="text-center">email</th>
-                    <th class="text-center">Time</th>
-                    <th class="text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let visitor of visitors; let i = index">
-                    <td class="text-center text-muted">{{i+1}}</td>
-                    <td>
-                      <div class="widget-content-left flex2">
-                        <div class="widget-heading">{{visitor.first_name}}</div>
-                        <div class="widget-subheading opacity-7">{{visitor.last_name}}</div>
-                      </div>
-                    </td>
-                    <td class="text-center">{{visitor.phone}}</td>
-                    <td class="text-center"> {{visitor.email}} </td>
-                    <td class="text-center"> {{visitor.time}} </td>
-                    <td class="text-center"><button class="btn-wide btn btn-danger"> Delete </button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        
+        <div class="storeOwnerCard">
+          <igx-card>
+            <igx-card-header> {{store.store_name}} </igx-card-header>
+            <igx-card-content> Hello World! </igx-card-content>
+            <igx-card-actions>
+              <div class="igx-card-actions__igroup--start">
+                <span igxButton="icon" igxRipple igxRippleCentered="true">
+                  <igx-icon name="add"></igx-icon>
+                </span>
+                <span igxButton="icon" igxRipple igxRippleCentered="true">
+                  <igx-icon name="star"></igx-icon>
+                </span>
+              </div>
+            </igx-card-actions>
+          </igx-card>
         </div>
         
+            
+        <div class="sample-wrapper">
+          <igx-grid #gridRowEditTransaction [data]="visitors" [primaryKey]="'id'" width="100%" height="500px"
+            [rowEditable]="true">
+            <igx-column field="id" header="Id" editable="false"></igx-column>
+            <igx-column field="first_name" header="First name" [dataType]="'string'"></igx-column>
+            <igx-column field="last_name" header="Last name" [dataType]="'string'"></igx-column>
+            <igx-column field="phone" header="Phone" [dataType]="'string'"></igx-column>  
+            <igx-column field="email" header="Email" [dataType]="'string'"></igx-column>
+            <igx-column field="time" header="Time" [dataType]="'string'"></igx-column>
+            <igx-column field="Discontinued" header="Discontinued" [dataType]="'boolean'"></igx-column>
+          </igx-grid>
+        </div>
+
       </div>
-      <div class="col-sm-2">
-        
-      </div>
+    </div>
+    
+    <div class="col-sm-2">
+      
     </div>
   </div>
 </body>

@@ -6,7 +6,7 @@ import { FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-store-check-in',
   templateUrl: './store-check-in.component.html',
-  styleUrls: ['./store-check-in.component.css']
+  styleUrls: ['./store-check-in.component.scss']
 })
 export class StoreCheckInComponent implements OnInit {
   store: Store;

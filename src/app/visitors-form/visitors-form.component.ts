@@ -10,7 +10,7 @@ import { StoreService } from '../store.service';
 @Component({
   selector: 'app-visitors-form',
   templateUrl: './visitors-form.component.html',
-  styleUrls: ['./visitors-form.component.css']
+  styleUrls: ['./visitors-form.component.scss']
 })
 
 
