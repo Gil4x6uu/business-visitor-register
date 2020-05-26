@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StoreService} from  '../store.service'
+import { StoreService} from  '../service/store.service'
 import { Store } from '../models/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup} from '@angular/forms';

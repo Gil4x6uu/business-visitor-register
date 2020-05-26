@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Store } from './models/store';
+import { Store } from '../models/store';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Visitor } from './models/visitor';
-import { StoreOwner } from './models/storeOwner';
+import { Visitor } from '../models/visitor';
+import { StoreOwner } from '../models/storeOwner';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +49,18 @@ constructor(
     return this.http.post<Store>(`${this.storeUrl}/addVisitorToStore`, {'visitor':visitor, 'storeId': storeId})
     .pipe(
       tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),
-      catchError(this.handleError<Store>('addVisitorToStore: ' + visitor._id))
+      catchError(this.handleError<Store>('addVisitorToStore: ' + visitor.id))
     );     
+  }
+  
+  
+  updateVisitoreToStore(visitor: Visitor, storeId: Number): Observable<Store> {
+
+    return this.http.post<Store>(`${this.storeUrl}/updateVisitorToStore`, { 'visitor': visitor, 'storeId': storeId })
+      .pipe(
+        tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),
+        catchError(this.handleError<Store>('addVisitorToStore: ' + visitor.id))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

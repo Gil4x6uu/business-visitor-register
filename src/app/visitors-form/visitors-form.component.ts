@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
 import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
-import { StoreService } from '../store.service';
+import { StoreService } from '../service/store.service';
 
 @Component({
   selector: 'app-visitors-form',

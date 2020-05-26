@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { GoogleLoginProvider, AuthService, SocialUser } from 'angularx-social-login';
-import { SocialloginService } from '../social-sign-in.service';
+import { SocialloginService } from '../service/social-sign-in.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { StoreOwner } from '../models/storeOwner';
 import { Store } from '../models/store';

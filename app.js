@@ -66,6 +66,15 @@ app.post('/addVisitorToStore', (req, res) => {
 
 });
 
+app.post('/updateVisitoreToStore', (req, res) => {
+    const collection = db.collection('storesDeatails');
+    collection.update({ id: req.body.storeId, visitors: req.body.visitor.id},
+        { $set: {  "visitors.$": req.body.visitor } }, (err, message) => {
+        res.send(message)
+    })
+
+});
+
 
 app.post('/Login/Savesresponse', (req, res) => {
     const storeOwnersCollection = db.collection('storeOwners');
