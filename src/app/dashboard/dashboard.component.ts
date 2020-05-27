@@ -7,6 +7,7 @@ import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
 import { IgxGridComponent, IGridEditEventArgs, IgxGridRowComponent } from 'igniteui-angular/';
 import { StoreService } from '../service/store.service'
+import { VisitorsDataGridService } from '../service/visitors-data-grid.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('myGrid', { read: IgxGridComponent })
   public gridRowEdit: IgxGridComponent;
   
-  constructor(public OAuth: AuthService, private router: Router, private storeService: StoreService) { }
+  constructor(public OAuth: AuthService, private router: Router, private storeService: StoreService, private visitorsGridService: VisitorsDataGridService) { }
   
   
   ngOnInit() {
@@ -38,15 +39,19 @@ export class DashboardComponent implements OnInit {
     console.log(this.store);
   }
   
-  endRowEditEvent(event: IgxGridRowComponent){
-    
-    const newRow = event.rowData	
-    this.storeService.updateVisitoreToStore(newRow, this.store.id )
-      .subscribe(store =>{
-        this.store = store;
-        this.visitors = store.visitors;
+  editDone(event: IGridEditEventArgs){
+    const newRow =  event.newValue;
+    this.storeService.updateVisitoreToStore(newRow, this.store.id)
+      .subscribe(store => {
+        this.store = store[0];
+        this.visitors = this.store.visitors;
+        localStorage.setItem('store', JSON.stringify(this.store));
       })
-    } 
+  } 
+  
+  
+  
+
   
   logout() {
     localStorage.clear();

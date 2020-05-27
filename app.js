@@ -52,26 +52,45 @@ app.get('/getStores', (req, res) => {
 });
 
 app.get('/getStoresById', (req, res) => {
-    const collection = db.collection('storesDeatails');
-    collection.find({ 'id': Number(req.query.id) }).toArray((err, store) => {
-        res.send(store);
-    })
+    getStoreById(req.query.id)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 });
+
+
 
 app.post('/addVisitorToStore', (req, res) => {
     const collection = db.collection('storesDeatails');
-    collection.update({ id: req.body.storeId }, { $push: { visitors: req.body.visitor } }, (err, message) => {
+    collection.updateOne({ id: req.body.storeId }, { $push: { visitors: req.body.visitor } }, (err, message) => {
         res.send(message)
     })
 
 });
 
-app.post('/updateVisitoreToStore', (req, res) => {
+app.post('/updateVisitorToStore', (req, res) => {
     const collection = db.collection('storesDeatails');
-    collection.update({ id: req.body.storeId, visitors: req.body.visitor.id},
-        { $set: {  "visitors.$": req.body.visitor } }, (err, message) => {
-        res.send(message)
-    })
+    collection.updateOne({ id: req.body.storeId },
+        { $set: { [`visitors.${req.body.visitor.id}`]: req.body.visitor } }, (err, message) => {
+            if (message.result.ok === 1) {
+                getStoreById(req.body.storeId)
+                    .then((result) => {
+                        res.send(result);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                
+
+            }
+            else {
+
+            }
+
+        })
 
 });
 
@@ -88,7 +107,7 @@ app.post('/Login/Savesresponse', (req, res) => {
                             userDoc = googleResult.data;
                             storesDeatailsCollection.countDocuments({})
                                 .then((countResult) => {
-                                    userDoc.store_id = countResult+1;
+                                    userDoc.store_id = countResult + 1;
                                     storeOwnersCollection.insertOne(userDoc);
                                     storeDoc = {};
                                     storeDoc.id = userDoc.store_id;
@@ -122,8 +141,10 @@ async function validateTokenAndGetGoogleUserInfo(token) {
     return this.googleUserData = oauth2.userinfo.get()
 
 }
-
-
+async function getStoreById(storeId) {
+    const collection = db.collection('storesDeatails');
+    return collection.find({ 'id': Number(storeId) }).toArray();
+}
 // LISTEN ON PORT
 app.listen(port, () =>
     console.log(`API RUNNING ON LOCALHOST: ${port}`)
