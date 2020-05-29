@@ -1,46 +1,46 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  
-  <div class="form-group" [ngClass]="{ 'has-error': invalidFirstName() }">
-    <!-- First Name -->
-    <label for="first_name" class="control-label">First Name</label>
-    <input type="text" formControlName="first_name" class="form-control" id="first_name" name="first_name"
-      placeholder="Martin">
-    <p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">Invalid first name.</p>
-  </div>
-  
-  
-  <div class="form-group" [ngClass]="{ 'has-error': invalidLastName() }">
-    <!-- Last Name -->
-    <label for="last_name" class="control-label">Last Name</label>
-    <input type="text" formControlName="last_name" class="form-control" id="last_name" name="last_name"
-      placeholder="Toha">
-    <p *ngIf="invalidLastName()" id="last_name_error" class="help-block">Invalid last name.</p>
-  </div>
-  
-  
-    <div class="form-group" [ngClass]="{ 'has-error': invalidPhone() }">
-      <!-- Phone Number -->
-      <label for="phone" class="control-label">Phone number</label>
-      <input type="text" formControlName="phone" class="form-control" id="phone" name="phone" placeholder="05*-1234567">
-      <p *ngIf="invalidPhone()" id="phone_error" class="help-block">Invalid phone number.</p>
+
+  <div class="container-fluid">
+    <div class="checkInCard">
+      <igx-card>
+        <igx-card-header> Visitor Check In Form </igx-card-header>
+        
+        <igx-card-content >
+          <form  class="input-group-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <igx-input-group class="input-group-form">
+            <label igxLabel class="igxLabel" for="first_name"> First Name </label>
+            <input igxInput name="first_name" type="text" formControlName="first_name" required>
+            <igx-suffix>
+              <igx-icon class="personIcon" isActive="true">person</igx-icon>
+            </igx-suffix>
+          </igx-input-group>
+          
+          <igx-input-group class="input-group-form">
+            <label igxLabel for="last_name"> Last Name </label>
+            <input igxInput name="last_name" type="text" formControlName="last_name" required>
+            <igx-suffix>
+              <igx-icon class="personIcon" isActive="true">person</igx-icon>
+            </igx-suffix>
+          </igx-input-group>
+          
+          <igx-input-group class="input-group-form">
+            <label igxLabel for="phone"> Phone </label>
+            <input igxInput name="phone" type="text" formControlName="phone" required>
+            <igx-suffix>
+              <igx-icon class="personIcon" isActive="true">phone</igx-icon>
+            </igx-suffix>
+          </igx-input-group>
+          
+          <igx-input-group class="input-group-form">
+            <label igxLabel for="email"> E-mail </label>
+            <input igxInput name="email" type="text" formControlName="email" required >
+            <igx-suffix>
+              <igx-icon class="personIcon">email</igx-icon>
+            </igx-suffix>
+          </igx-input-group>
+          <button igxButton="raised" igxRipple type="submit"  [disabled]="!userForm.valid">Book</button>
+          </form>
+          
+        </igx-card-content>
+      </igx-card>
     </div>
-    
-  
-  <div class="form-group" [ngClass]="{ 'has-error': invalidEmail() }">
-    <!-- Email -->
-    <label for="email" class="control-label">E-mail</label>
-    <input type="text" formControlName="email" class="form-control" id="email" name="email"
-      placeholder="your@email.com">
-    <p *ngIf="invalidEmail()" id="email_error" class="help-block">Invalid email address.</p>
   </div>
-  
-  
-  <div class="form-group has-error">
-    <!-- Register Button -->
-    <button type="submit" class="btn btn-primary" >Register</button>
-  </div>
-    <div class="form-group has-error">
-      <!-- Back Button -->
-      <button (click) = "this.storeToUpdateChange.emit(null)" class="btn btn-primary">Back</button>
-    </div>
-</form>   

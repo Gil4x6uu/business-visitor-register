@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
 import { StoreService } from '../service/store.service';
+import { kMaxLength } from 'buffer';
 
 @Component({
   selector: 'app-visitors-form',
@@ -26,36 +27,18 @@ export class VisitorsFormComponent implements OnInit {
   
 
   constructor(private formBuilder: FormBuilder, private storeService: StoreService) {
-
+      this.userForm = this.formBuilder.group({
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      phone: ['', [Validators.minLength(10), Validators.maxLength(10)]],
+      email: ['', [Validators.email]],
+    });
   }
 
-  invalidFirstName() {
-    return (this.submitted && this.userForm.controls.first_name.errors != null);
-  }
-
-  invalidLastName() {
-    return (this.submitted && this.userForm.controls.last_name.errors != null);
-  }
-
-  invalidEmail() {
-    return (this.submitted && this.userForm.controls.email.errors != null);
-  }
-  invalidPhone() {
-    return (this.submitted && this.userForm.controls.phone.errors != null);
-  }
-  
-  goBackToCheckInForm(){
-    this.storeToUpdateChange.emit(null);
-  }
 
   ngOnInit() {
     
-    this.userForm = this.formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{3}(?:-[0-9]{7})?$')]],
-      email: ['', [Validators.required, Validators.email]],
-    });
+
     
   }
 
@@ -76,5 +59,8 @@ export class VisitorsFormComponent implements OnInit {
       });
     }
   }
-
-};
+  goBackToCheckInForm() {
+    this.storeToUpdateChange.emit(null);
+  }
+  
+}

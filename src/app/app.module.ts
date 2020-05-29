@@ -18,7 +18,8 @@ import {
 	IgxIconModule,
 	IgxButtonModule,
 	IgxRippleModule,
-	IgxCardModule
+	IgxCardModule,
+	IgxInputGroupModule
 } from 'igniteui-angular';
 export function socialConfigs() {
     const config = new AuthServiceConfig([
@@ -50,7 +51,8 @@ export function socialConfigs() {
         IgxIconModule,
         IgxButtonModule,
         IgxRippleModule,
-        IgxCardModule
+        IgxCardModule,
+        IgxInputGroupModule
     ],
     providers: [
         AuthService,
