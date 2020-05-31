@@ -1,6 +1,9 @@
-# BusinessVisitoreRegister
+# Register Me
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+### COVID-19 client registration platform
+A registration platform for businesses to handle, manage and control clients visits of physical stores.
+Platform enables business owners to keep track of customers with a virtual reception, monitor queues and reach the clients via a helpful landing page.
+
 
 ## Development server
 

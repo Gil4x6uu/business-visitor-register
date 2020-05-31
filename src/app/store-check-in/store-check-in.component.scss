@@ -1,0 +1,27 @@
+@import '~igniteui-angular/lib/core/styles/themes/index';
+.container-fluid > * {
+    margin-top: 32px;
+}
+
+.input-group-form {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    margin-bottom: 24px;
+    padding: 12px;
+}
+
+.checkInCard{
+    margin: 20px;
+}
+
+igx-icon{
+    margin-bottom: 10px;
+    size: 120px;
+}
+
+label{
+    font-size: small;
+    margin-bottom: 5px;
+}
+
+
+

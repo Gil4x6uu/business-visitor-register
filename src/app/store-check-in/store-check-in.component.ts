@@ -12,7 +12,6 @@ import { Visitor } from '../models/visitor';
 export class StoreCheckInComponent implements OnInit {
   store: Store;
   stores: Store[];
-  storeIdForm: FormGroup;
   userForm: FormGroup;
   visitorInfo: Visitor;
   todayTime: Date;
