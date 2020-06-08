@@ -11,6 +11,7 @@ import { Visitor } from '../models/visitor';
 })
 export class StoreCheckInComponent implements OnInit {
   store: Store;
+  storeId: number;
   stores: Store[];
   userForm: FormGroup;
   visitorInfo: Visitor;

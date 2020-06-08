@@ -1,0 +1,102 @@
+.wrapper {
+margin: 0;
+padding: 10px;
+
+}
+
+.header {
+  padding: 5px;
+  text-align: center;
+  background-color: #2f2e33;
+  font-family:'Arial Narrow Bold';
+  color: white;
+  
+}
+
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  background-color: #2f2e33;
+
+
+}
+
+.main {
+  display: flex;
+  flex-flow: column wrap;
+  
+}
+.content{
+  display: flex;
+  flex:100%;
+  flex-flow: row nowrap;
+  background: #d5d6d2;
+  
+
+}
+.content-left {
+      flex: 50%;
+      padding-top: 10px;
+      
+}
+
+.logo{
+  float: right;
+}
+.content-right{
+  flex: 50%;
+  padding-top:25px;
+  
+}
+
+.aside{
+  position: relative;
+    display: flex;
+    flex: 100%;
+    flex-flow: row ;
+    text-align: center;
+}
+
+.aside-1 {
+   position: relative;
+   background-color:tomato; 
+  flex: 50%; 
+}
+
+.aside-2 {
+   position: relative;
+       background-color: #3a5199; 
+
+   flex: 50%;
+}
+.login-button{
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.check-in-input{
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.img-signin{
+  max-width: 100%;
+  height: auto;
+}
+@media screen and (max-width: 800px) {
+  .content {   
+    flex-flow: column wrap;
+  }
+  .aside{
+    flex-flow: column wrap ;
+  }
+  .check-in-input{
+    width: 50%;
+    height: auto;
+  }
+}
+

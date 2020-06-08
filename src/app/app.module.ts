@@ -9,8 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { GoogleLoginProvider, FacebookLoginProvider, AuthService } from 'angularx-social-login';
-import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider,  AuthService } from 'angularx-social-login';
+import { AuthServiceConfig } from 'angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
 	IgxGridModule,
@@ -19,7 +19,9 @@ import {
 	IgxButtonModule,
 	IgxRippleModule,
 	IgxCardModule,
-	IgxInputGroupModule
+    IgxInputGroupModule,
+    IgxNavbarModule
+ 
 } from 'igniteui-angular';
 export function socialConfigs() {
     const config = new AuthServiceConfig([

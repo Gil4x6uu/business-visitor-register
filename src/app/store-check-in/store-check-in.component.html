@@ -1,64 +1,62 @@
 <div *ngIf="!store">
-<form  class='text-center'>
-  <div class="form-group">
-    <h1>Check in to store with store ID</h1>
-  </div>
-  <div class="form-group">
-    <input #storeId type="text" class="form-control" placeholder="Store ID">
-  </div>
-  <div class="form-group">
-    <button igxButton="outlined" (click)="getStoreById(storeId.value)"> Check in to store </button>
-  </div>
-</form>
-</div>
-
-
-<div *ngIf="store" >
-  
-<div class="container-fluid">
-  <div class="checkInCard">
-    <igx-card>
-      <igx-card-header> Visitor Check In to {{store.store_name}}  Form </igx-card-header>
-      <igx-card-content>
-        <form class="input-group-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
-          <igx-input-group class="input-group-form">
-            <label igxLabel class="igxLabel" for="first_name"> First Name </label>
-            <input igxInput name="first_name" type="text" formControlName="first_name" required>
-            <igx-suffix>
-              <igx-icon  isActive="true">person</igx-icon>
-            </igx-suffix>
+  <igx-card>
+    <igx-card-header > </igx-card-header>
+    <igx-card-content>
+      <form>
+        <div class="form-group">
+          <igx-input-group>
+            <input igxInput name="storeId" type="text" [(ngModel)]="storeId" required="required" />
+            <label igxLabel for="storeId"></label>
           </igx-input-group>
-          <igx-input-group class="input-group-form">
-            <label igxLabel for="last_name"> Last Name </label>
-            <input igxInput name="last_name" type="text" formControlName="last_name" required>
-            <igx-suffix>
-              <igx-icon  isActive="true">person</igx-icon>
-            </igx-suffix>
-          </igx-input-group>
-          <igx-input-group class="input-group-form">
-            <label igxLabel for="phone"> Phone </label>
-            <input igxInput name="phone" type="text" formControlName="phone" required>
-            <igx-suffix>
-              <igx-icon  isActive="true">phone</igx-icon>
-            </igx-suffix>
-          </igx-input-group>
-          <igx-input-group class="input-group-form">
-            <label igxLabel for="email"> E-mail </label>
-            <input igxInput name="email" type="text" formControlName="email" required>
-            <igx-suffix>
-              <igx-icon >email</igx-icon>
-            </igx-suffix>
-          </igx-input-group>
-          <button igxButton="raised" igxRipple type="submit" [disabled]="!userForm.valid">Book</button>
-        </form>
-      </igx-card-content>
-    </igx-card>
-  </div>
+        </div>
+        <div class="form-group">
+          <button igxButton="outlined" (click)="getStoreById(storeId)"> Check in to store </button>
+        </div>
+      </form>
+    </igx-card-content>
+  </igx-card>
 </div>
 <div *ngIf="store">
-  
-  
+  <div class="container-fluid">
+    <div class="checkInCard">
+      <igx-card>
+        <igx-card-header> Check In to {{store.store_name}} </igx-card-header>
+        <igx-card-content>
+          <form class="input-group-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <igx-input-group class="input-group-form">
+              <label igxLabel class="igxLabel" for="first_name"> First Name </label>
+              <input igxInput name="first_name" type="text" formControlName="first_name" required>
+              <igx-suffix>
+                <igx-icon isActive="true">person</igx-icon>
+              </igx-suffix>
+            </igx-input-group>
+            <igx-input-group class="input-group-form">
+              <label igxLabel for="last_name"> Last Name </label>
+              <input igxInput name="last_name" type="text" formControlName="last_name" required>
+              <igx-suffix>
+                <igx-icon isActive="true">person</igx-icon>
+              </igx-suffix>
+            </igx-input-group>
+            <igx-input-group class="input-group-form">
+              <label igxLabel for="phone"> Phone </label>
+              <input igxInput name="phone" type="text" formControlName="phone" required>
+              <igx-suffix>
+                <igx-icon isActive="true">phone</igx-icon>
+              </igx-suffix>
+            </igx-input-group>
+            <igx-input-group class="input-group-form">
+              <label igxLabel for="email"> E-mail </label>
+              <input igxInput name="email" type="text" formControlName="email" required>
+              <igx-suffix>
+                <igx-icon>email</igx-icon>
+              </igx-suffix>
+            </igx-input-group>
+            <button igxButton="raised" igxRipple type="submit" [disabled]="!userForm.valid">Book</button>
+          </form>
+        </igx-card-content>
+      </igx-card>
+    </div>
+  </div>
+  <div *ngIf="store">
+  </div>
 </div>
- 
-</div>
-  
