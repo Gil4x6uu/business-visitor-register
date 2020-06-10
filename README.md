@@ -22,3 +22,14 @@ node server.js
 ````
 To Visit App:
 [http://localhost:3000]
+
+## About the project.
+I will write it soon, Project still in progress...
+
+### Built with
+- [Angular](https://angular.io/start)
+- [Express](https://expressjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Ignite UI for Angular](https://www.infragistics.com/products/ignite-ui-angular)
+- [google-api-OAuth2](https://github.com/googleapis/google-api-nodejs-client/)
+
