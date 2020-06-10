@@ -1,14 +1,72 @@
+
+
+
 .wrapper{
     display: flex;
+    flex-flow: column wrap;
+
 }
 
-.logout{
-    margin-top: 10px;
+.header {
+  display: flex;
+  background-color: #555955;
+  font-family:'Arial Narrow Bold';
+  color: white;
+  
+}
+
+.avatar-and-logout{
+    flex: 10%;
+    
+}
+.logo{
+   flex: 90%;
+
+}
+
+.main-panel{
+    display: flex;
+    background-color: #2094B9;
+}
+.left-main-panel{
+    flex: 30%;
+}
+
+.center-main-panel{
+    flex:40%;
 }
 
 .storeOwnerCard{
+    text-align: center;
+       
+}
+
+.right-main-panel{
+        flex: 30%;
+
+}
+igx-card{
+    background-color:#CFAA88;
     margin: 20px;
 }
+
 .visitorsGrid{
+ 
     margin: 20px;
 }
+
+.footer{
+  background-color: #555955;
+  font-family:'Arial Narrow Bold';
+  color: white;
+  
+}
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,8 @@
 .wrapper {
 margin: 0;
 padding: 10px;
-
+font-family: LibreBaskerville;
 }
-
 .header {
   padding: 5px;
   text-align: center;
@@ -12,42 +11,50 @@ padding: 10px;
   color: white;
   
 }
-
-
 .footer {
   padding: 20px;
   text-align: center;
   background-color: #2f2e33;
-
-
 }
 
 .main {
   display: flex;
   flex-flow: column wrap;
-  
 }
 .content{
   display: flex;
   flex:100%;
   flex-flow: row nowrap;
   background: #d5d6d2;
-  
-
+  width: 100%;
+  height: auto;
 }
 .content-left {
       flex: 50%;
-      padding-top: 10px;
-      
+       padding-top: 10px;
+       
+           .logo{
+                float: right;
+             }   
 }
 
-.logo{
-  float: right;
-}
 .content-right{
   flex: 50%;
-  padding-top:25px;
+  padding-top: 10px;
+}
+
+igx-card{
+  width:100%;
+  height: auto;
+  background-color:#d5d6d2 ;
   
+              igx-card-header{
+                font-size: x-large;
+             }
+             ul{
+                font-size: large;
+                line-height: 2em;
+              }
 }
 
 .aside{
@@ -87,6 +94,9 @@ padding: 10px;
   max-width: 100%;
   height: auto;
 }
+
+
+
 @media screen and (max-width: 800px) {
   .content {   
     flex-flow: column wrap;

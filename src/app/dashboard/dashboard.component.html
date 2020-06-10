@@ -1,57 +1,93 @@
-<body>
-  <div class="wrapper">
-    <div class="row">
-      <div class="col-sm-2">
-        <igx-avatar [src]="storeOwner.picture" roundShape="true" size="large"></igx-avatar>
-        <div class="logout">
-          <span igxButton="outlined" (click)="logout()">Sign Out </span>
-        </div>
-      </div>
-      <div class="col-sm-8">
-        <div class="storeOwnerCard">
-          <igx-card>
-            <igx-card-header> {{store.store_name}} </igx-card-header>
-            <igx-card-content> Hello World! </igx-card-content>
-            <igx-card-actions>
-              <div class="igx-card-actions__igroup--start">
-                <span igxButton="icon" igxRipple igxRippleCentered="true">
-                  <igx-icon name="add"></igx-icon>
-                </span>
-                <span igxButton="icon" igxRipple igxRippleCentered="true">
-                  <igx-icon name="star"></igx-icon>
-                </span>
-              </div>
-            </igx-card-actions>
-          </igx-card>
-        </div>
-        <div class="visitorsGrid">
-          <igx-grid #myGrid [data]="visitors" [primaryKey]="'id'" width="100%" height="500px"(onRowEdit)="editDone($event)" [rowEditable]="true">
-            <igx-column field="id" header="Id" editable="false"></igx-column>
-            <igx-column field="first_name" header="First name" [dataType]="'string'"></igx-column>
-            <igx-column field="last_name" header="Last name" [dataType]="'string'"></igx-column>
-            <igx-column field="phone" header="Phone" [dataType]="'string'"></igx-column>
-            <igx-column field="email" header="Email" [dataType]="'string'"></igx-column>
-            <igx-column field="time" header="Time" [dataType]="'string'" editable="false"></igx-column>
-            <ng-template igxCellEditor let-cell="cell">
-              <igx-input-group>
-                <input igxInput [igxFocus]='true' name="units" [(ngModel)]="cell.editValue" style="color: black" />
-              </igx-input-group>
-            </ng-template>
-            <ng-template igxRowEditActions let-endEdit>
-              <div class="custom-buttons">
-                <button igxButton="icon" class="custom-button" igxRowEditTabStop (click)="endEdit(false)">
-                  <igx-icon>clear</igx-icon>
-                </button>
-                <button igxButton="icon" class="custom-button" igxRowEditTabStop (click)="endEdit(true)">
-                  <igx-icon>check</igx-icon>
-                </button>
-              </div>
-            </ng-template>
-          </igx-grid>
-        </div>
+<div class="wrapper">
+  <header class="header">
+    <div class="avatar-and-logout">
+      <igx-avatar [src]="storeOwner.picture" roundShape="true" size="large"></igx-avatar>
+      <span igxButton="outlined" (click)="logout()">Sign Out </span>
+    </div>
+    <div class="logo">
+    </div>
+  </header>
+  
+  
+  <div class="main-panel">
+    <div class="left-main-panel">
+              <igx-card>
+                <igx-card-header> {{store.store_name}} </igx-card-header>
+                <igx-card-content> Hello World! </igx-card-content>
+                <igx-card-actions>
+                  <div class="igx-card-actions__igroup--start">
+                    <span igxButton="icon" igxRipple igxRippleCentered="true">
+                      <igx-icon name="add"></igx-icon>
+                    </span>
+                    <span igxButton="icon" igxRipple igxRippleCentered="true">
+                      <igx-icon name="star"></igx-icon>
+                    </span>
+                  </div>
+                </igx-card-actions>
+              </igx-card>
+    </div>
+    <div class="center-main-panel">
+      <div class="storeOwnerCard">
+        <igx-card>
+          <igx-card-header> {{store.store_name}} </igx-card-header>
+          <igx-card-content> Hello World! </igx-card-content>
+          <igx-card-actions>
+            <div class="igx-card-actions__igroup--start">
+              <span igxButton="icon" igxRipple igxRippleCentered="true">
+                <igx-icon name="add"></igx-icon>
+              </span>
+              <span igxButton="icon" igxRipple igxRippleCentered="true">
+                <igx-icon name="star"></igx-icon>
+              </span>
+            </div>
+          </igx-card-actions>
+        </igx-card>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="right-main-panel">
+              <igx-card>
+                <igx-card-header> {{store.store_name}} </igx-card-header>
+                <igx-card-content> Hello World! </igx-card-content>
+                <igx-card-actions>
+                  <div class="igx-card-actions__igroup--start">
+                    <span igxButton="icon" igxRipple igxRippleCentered="true">
+                      <igx-icon name="add"></igx-icon>
+                    </span>
+                    <span igxButton="icon" igxRipple igxRippleCentered="true">
+                      <igx-icon name="star"></igx-icon>
+                    </span>
+                  </div>
+                </igx-card-actions>
+              </igx-card>
     </div>
   </div>
-</body>
+  
+  
+  <div class="visitorsGrid">
+    <igx-grid #myGrid [data]="visitors" [primaryKey]="'id'" width="100%" height="auto" (onRowEdit)="editDone($event)"
+      [rowEditable]="true" [showToolbar]="true"  toolbarTitle="Visitors" >
+      <igx-column field="id" header="Id" editable="false" sortable="true"></igx-column>
+      <igx-column field="first_name" header="First name" [dataType]="'string'"></igx-column>
+      <igx-column field="last_name" header="Last name" [dataType]="'string'"></igx-column>
+      <igx-column field="phone" header="Phone" [dataType]="'string'" sortable="true"></igx-column>
+      <igx-column field="email" header="Email" [dataType]="'string'"></igx-column>
+      <igx-column field="time" header="Time" [dataType]="'string'" editable="false" sortable="true"></igx-column>
+      <ng-template igxCellEditor let-cell="cell">
+        <igx-input-group>
+          <input igxInput [igxFocus]='true' name="units" [(ngModel)]="cell.editValue" style="color: black" />
+        </igx-input-group>
+      </ng-template>
+      <ng-template igxRowEditActions let-endEdit>
+        <div class="custom-buttons">
+          <button igxButton="icon" class="custom-button" igxRowEditTabStop (click)="endEdit(false)">
+            <igx-icon>clear</igx-icon>
+          </button>
+          <button igxButton="icon" class="custom-button" igxRowEditTabStop (click)="endEdit(true)">
+            <igx-icon>check</igx-icon>
+          </button>
+        </div>
+      </ng-template>
+    </igx-grid>
+  </div>
+  <footer class="footer">Footer</footer>
+</div>
