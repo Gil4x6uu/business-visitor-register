@@ -4,7 +4,7 @@
 A registration platform for businesses to handle, manage and control clients visits of physical stores.
 Platform enables business owners to keep track of customers with a virtual reception, monitor queues and reach the clients via a helpful landing page.
 ## Screen Shot:
-[](img/ss1.jpg)
+![](img/SS1.jpg)
 ## Installation and Setup Instructions:
 Clone down this repository. You will need [node](https:https://nodejs.org/en/) and [npm](https:https://nodejs.org/en/) installed globally on your machine. 
 
