@@ -21,7 +21,7 @@ And then
 node server.js
 ````
 To Visit App:
-[http://localhost:3000]
+[http://localhost:4200]
 
 ## About the project.
 I will write it soon, Project still in progress...
