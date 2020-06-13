@@ -18,7 +18,7 @@ npm start
 ```
 And then
 ```bash
-node server.js
+node app.js
 ````
 To Visit App:
 [http://localhost:4200]
