@@ -12,8 +12,8 @@
   <div class="main-panel">
     <div class="left-main-panel">
               <igx-card>
-                <igx-card-header> {{store.store_name}} </igx-card-header>
-                <igx-card-content> Hello World! </igx-card-content>
+                <igx-card-header>  </igx-card-header>
+                <igx-card-content>  </igx-card-content>
                 <igx-card-actions>
                   <div class="igx-card-actions__igroup--start">
                     <span igxButton="icon" igxRipple igxRippleCentered="true">
@@ -29,8 +29,13 @@
     <div class="center-main-panel">
       <div class="storeOwnerCard">
         <igx-card>
-          <igx-card-header> {{store.store_name}} </igx-card-header>
-          <igx-card-content> Hello World! </igx-card-content>
+          <igx-card-header> Store details </igx-card-header>
+          <igx-card-content>
+            <ul>
+          <li> Store name:  {{store.store_name}}</li>
+          <li>Your store ID is: {{store.id}}</li>
+          </ul>
+          </igx-card-content>
           <igx-card-actions>
             <div class="igx-card-actions__igroup--start">
               <span igxButton="icon" igxRipple igxRippleCentered="true">
@@ -46,8 +51,8 @@
     </div>
     <div class="right-main-panel">
               <igx-card>
-                <igx-card-header> {{store.store_name}} </igx-card-header>
-                <igx-card-content> Hello World! </igx-card-content>
+                <igx-card-header> </igx-card-header>
+                <igx-card-content>  </igx-card-content>
                 <igx-card-actions>
                   <div class="igx-card-actions__igroup--start">
                     <span igxButton="icon" igxRipple igxRippleCentered="true">
@@ -63,9 +68,9 @@
   </div>
   
   
-  <div class="visitorsGrid">
-    <igx-grid #myGrid [data]="visitors" [primaryKey]="'id'" width="100%" height="auto" (onRowEdit)="editDone($event)"
-      [rowEditable]="true" [showToolbar]="true"  toolbarTitle="Visitors" >
+  <div class="visitorsGrid" >
+    <igx-grid  #myGrid [displayDensity]= "'cosy'"[data]="visitors" [primaryKey]="'id'" width="100%" height="auto" (onRowEdit)="editDone($event)"
+      [rowEditable]="true" [showToolbar]="true"  toolbarTitle="Visitors"  >
       <igx-column field="id" header="Id" editable="false" sortable="true"></igx-column>
       <igx-column field="first_name" header="First name" [dataType]="'string'"></igx-column>
       <igx-column field="last_name" header="Last name" [dataType]="'string'"></igx-column>

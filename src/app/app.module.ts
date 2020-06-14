@@ -12,17 +12,11 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { GoogleLoginProvider,  AuthService } from 'angularx-social-login';
 import { AuthServiceConfig } from 'angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-	IgxGridModule,
-	IgxAvatarModule,
-	IgxIconModule,
-	IgxButtonModule,
-	IgxRippleModule,
-	IgxCardModule,
-    IgxInputGroupModule,
-    IgxNavbarModule
- 
-} from 'igniteui-angular';
+import {	IgxGridModule,	IgxAvatarModule,	IgxIconModule,	IgxButtonModule,	IgxRippleModule,	IgxCardModule,
+    IgxInputGroupModule    
+ } from 'igniteui-angular';
+import { MonitorQueuesComponent } from './monitor-queues/monitor-queues.component';
+
 export function socialConfigs() {
     const config = new AuthServiceConfig([
         {
@@ -33,37 +27,40 @@ export function socialConfigs() {
     return config;
 }
 @NgModule({
-    declarations: [
-        AppComponent,
-        VisitorsFormComponent,
-        StoreCheckInComponent,
-        LoginComponent,
-        DashboardComponent,
-        MainScreenComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        IgxGridModule,
-        BrowserAnimationsModule,
-        IgxAvatarModule,
-        IgxIconModule,
-        IgxButtonModule,
-        IgxRippleModule,
-        IgxCardModule,
-        IgxInputGroupModule
-    ],
-    providers: [
-        AuthService,
+   declarations: [
+      AppComponent,
+      VisitorsFormComponent,
+      StoreCheckInComponent,
+      LoginComponent,
+      DashboardComponent,
+      MainScreenComponent,
+      MonitorQueuesComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      IgxGridModule,
+      BrowserAnimationsModule,
+      IgxAvatarModule,
+      IgxIconModule,
+      IgxButtonModule,
+      IgxRippleModule,
+      IgxCardModule,
+      IgxInputGroupModule
+   ],
+   providers: [
+      AuthService,
         {
             provide: AuthServiceConfig,
             useFactory: socialConfigs
         }
     ],
-    bootstrap: [AppComponent]
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule {
 }

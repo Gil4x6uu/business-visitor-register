@@ -1,31 +1,16 @@
-// src/styles.scss
-   @import '~igniteui-angular/lib/core/styles/themes/index';
 
 
-   /* autoprefixer grid:on */
+// CSS Reset, comment out if not required or using a different module
+// @import '~minireset.css/minireset';
+@import '~igniteui-angular/lib/core/styles/themes/index';
+@include igx-core();
+@include igx-theme($default-palette, $legacy-support: true);
 
-
-$primary-color: #2094B9;
-$secondary-color: #131111; 
-
-$my-color-palette: igx-palette(
-    $primary: $primary-color,
-    $secondary: $secondary-color
-);
-.dark-theme {
-    background: #333;
-    color: #fff;
-
-    @include igx-dark-theme($default-palette);
+igx-grid-cell {
+  font-family: LibreBaskerville;
 }
 
-$custom-theme: igx-grid-theme(
-    $sorted-header-icon-color: #ff00ff,
-    $sortable-header-icon-hover-color: black
- 
-);
-   @include igx-core();
-   @include igx-theme($my-color-palette);
+
 
 @font-face {
   font-family: "LibreBaskerville";

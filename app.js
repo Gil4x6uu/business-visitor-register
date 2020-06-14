@@ -21,6 +21,7 @@ const oauth2Client = new OAuth2();
 
 let googleUserData;
 let db;
+
 client.connect(function (err) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
