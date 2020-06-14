@@ -18,25 +18,24 @@ npm start
 ```
 And then
 ```bash
-node server.js
+node app.js
 ````
 To Visit App:
 [http://localhost:4200]
 
 ## About the project.
- I came up with the web app While COVID-19 quarantine in Israel was about to end.
-
-The government released a note that all businesses need to log all the customers visit their business.
-My mother's shoe store for example uses a Handwritten log that took precious time. 
-
-The other day, while waiting to enter a store I realize the need for a digital waiting list of customers outside the store, Can help avoid arguments :) 
+ I wanted to write a full stack project for my resume.
+ 
+ The idea came while COVID-19 quarantine was about to end, the government released a note that all businesses need to log all customers visit their business.
+ 
+The other day, while waiting to enter a store I realize the need for queue monitor   customers waiting outside a store, Can help avoid arguments :) 
 
 ##### The idea is simple:
 - Store owners log in with google and create a store.
 
 - Each store gets a unique id.
 
-- Customers register to store by store id and then fill a short registration form.
+- Customers register to store by store unique id and then fill a short registration form.
 
 - The store owner has a dashboard with an editable log and a Track of the queue outside.
 
