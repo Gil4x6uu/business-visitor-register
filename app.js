@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || '3000';
 const cors = require('cors');
 
+
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,6 +19,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 const google = require('googleapis').google;
 const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2();
+
+
+const SSE = require('express-sse');
+const sse = new SSE();
 
 let googleUserData;
 let db;
@@ -65,12 +70,22 @@ app.get('/getStoresById', (req, res) => {
 
 
 app.post('/addVisitorToStore', (req, res) => {
-    const collection = db.collection('storesDeatails');
-    collection.updateOne({ id: req.body.storeId }, { $push: { visitors: req.body.visitor } }, (err, message) => {
-        res.send(message)
-    })
-
+    const storeId = req.body.storeId;
+    const visitor = req.body.visitor;
+    addVisitorToStore(visitor, storeId)
+        .then((result) => {
+            getStoreById(result.value.id)
+                .then((result) => {
+                    sse.send(result);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        })
 });
+
+        
+
 
 app.post('/updateVisitorToStore', (req, res) => {
     const collection = db.collection('storesDeatails');
@@ -84,7 +99,7 @@ app.post('/updateVisitorToStore', (req, res) => {
                     .catch((err) => {
                         console.log(err);
                     })
-                
+
 
             }
             else {
@@ -113,6 +128,7 @@ app.post('/Login/Savesresponse', (req, res) => {
                                     storeDoc = {};
                                     storeDoc.id = userDoc.store_id;
                                     storeDoc.store_name = `${userDoc.given_name}s store`;
+                                    storeDoc.visitorsCount = 0;
                                     storeDoc.visitors = [];
                                     storesDeatailsCollection.insertOne(storeDoc);
                                     res.send([userDoc, storeDoc]);
@@ -131,7 +147,7 @@ app.post('/Login/Savesresponse', (req, res) => {
         })
 });
 
-
+app.get('/stream', sse.init);
 
 async function validateTokenAndGetGoogleUserInfo(token) {
     oauth2Client.setCredentials(token);
@@ -146,6 +162,16 @@ async function getStoreById(storeId) {
     const collection = db.collection('storesDeatails');
     return collection.find({ 'id': Number(storeId) }).toArray();
 }
+
+async function incrementVisitorsCount(storeId) {
+    const collection = db.collection('storesDeatails');
+    return collection.findOneAndUpdate({ id: storeId }, { $inc: { visitorsCount: 1 } });
+}
+async function addVisitorToStore(visitor, storeId) {
+    const collection = db.collection('storesDeatails');
+    return collection.findOneAndUpdate({ id: storeId }, { $push: { visitors: visitor } });
+}
+
 // LISTEN ON PORT
 app.listen(port, () =>
     console.log(`API RUNNING ON LOCALHOST: ${port}`)

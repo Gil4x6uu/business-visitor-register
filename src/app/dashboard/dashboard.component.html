@@ -52,7 +52,9 @@
     <div class="right-main-panel">
               <igx-card>
                 <igx-card-header> </igx-card-header>
-                <igx-card-content>  </igx-card-content>
+                <igx-card-content> 
+                  <app-monitor-queues [VisitorsQueue] = "todayVisitors"></app-monitor-queues> 
+                </igx-card-content>
                 <igx-card-actions>
                   <div class="igx-card-actions__igroup--start">
                     <span igxButton="icon" igxRipple igxRippleCentered="true">

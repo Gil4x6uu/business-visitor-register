@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { IgxGridComponent } from 'igniteui-angular';
+import { Visitor } from '../models/visitor';
 
 @Component({
   selector: 'app-monitor-queues',
@@ -9,6 +10,8 @@ import { IgxGridComponent } from 'igniteui-angular';
 export class MonitorQueuesComponent implements OnInit {
   @ViewChild('monitorGrid', { read: IgxGridComponent })
   public grid: IgxGridComponent;
+  
+  @Input() VisitorsQueue : Visitor[];
   
   constructor() { }
 

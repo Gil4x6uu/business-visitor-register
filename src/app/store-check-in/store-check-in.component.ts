@@ -56,10 +56,9 @@ export class StoreCheckInComponent implements OnInit {
       this.visitorInfo = new Visitor(this.userForm.value);
       this.visitorInfo.time = new Date().toLocaleString();
       this.storeService.addVisitoreToStore(this.visitorInfo, this.store.id)
-        .subscribe(message => {
-          console.log(`inside onSubmit in visitor form ${message}`);
-          this.store = null;
+      .subscribe(message => {           
         });
+      this.store = null;
     }
   }
   goBackToCheckInForm() {
