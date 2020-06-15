@@ -19,10 +19,10 @@ import { VisitorsDataGridService } from '../service/visitors-data-grid.service';
 
 
 export class DashboardComponent implements OnInit {
-  storeOwner = new StoreOwner();
-  store: Store;
-  visitors: Visitor[];
-  todayVisitors: Visitor[] = [];
+  public storeOwner = new StoreOwner();
+  public store: Store;
+  public visitors: Visitor[];
+  public todayVisitors: Visitor[] = [];
 
 
   
@@ -68,6 +68,7 @@ export class DashboardComponent implements OnInit {
         visitor.id = index;
       });
       const lastVisitor: Visitor = this.visitors[(this.visitors.length) - 1]
+      this.todayVisitors = this.todayVisitors.slice();
       this.todayVisitors.push(lastVisitor);
     }
     
@@ -78,6 +79,7 @@ export class DashboardComponent implements OnInit {
     const lastKnownDate = (localStorage.getItem("lastKnownDate").split(","))[0];
     console.log(`now is:${now} and last known date is:${lastKnownDate}`)
     if(now != lastKnownDate){
+      console.log(`inside if statment ---- now is:${now} and last known date is:${lastKnownDate}`)
       this.todayVisitors = [];
     }    
   }

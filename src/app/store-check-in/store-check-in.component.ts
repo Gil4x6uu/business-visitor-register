@@ -16,6 +16,7 @@ export class StoreCheckInComponent implements OnInit {
   userForm: FormGroup;
   visitorInfo: Visitor;
   todayTime: Date;
+  thankYou: boolean;
   constructor(
     private storeService: StoreService,
     private formBuilder: FormBuilder
@@ -47,6 +48,8 @@ export class StoreCheckInComponent implements OnInit {
       
     }
   }
+  
+  
   onSubmit() {
       if (this.userForm.invalid == true) {
       return;
@@ -58,11 +61,14 @@ export class StoreCheckInComponent implements OnInit {
       this.storeService.addVisitoreToStore(this.visitorInfo, this.store.id)
       .subscribe(message => {           
         });
-      this.store = null;
+      this.thankYou = true;
     }
   }
   goBackToCheckInForm() {
+    this.storeId = null;
+    this.userForm.reset();
     this.store = null;
+    this.thankYou = false;
   }
    
   ngOnInit() {

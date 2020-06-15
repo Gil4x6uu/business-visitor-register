@@ -1,4 +1,4 @@
-<div *ngIf="!store">
+<div *ngIf="!store && !thankYou">
   <igx-card>
     <igx-card-header > </igx-card-header>
     <igx-card-content>
@@ -16,7 +16,7 @@
     </igx-card-content>
   </igx-card>
 </div>
-<div *ngIf="store">
+<div *ngIf="store && !thankYou">
   <div class="container-fluid">
     <div class="checkInCard">
       <igx-card>
@@ -52,11 +52,14 @@
               </igx-suffix>
             </igx-input-group>
             <button igxButton="raised" igxRipple type="submit" [disabled]="!userForm.valid">Book</button>
+            <button igxButton="outlined" (click)="goBackToCheckInForm()"> Back </button>
           </form>
         </igx-card-content>
       </igx-card>
     </div>
   </div>
-  <div *ngIf="store">
-  </div>
+</div>
+<div *ngIf="thankYou">
+  <p>Thank you</p>
+  <button igxButton="outlined" (click)="goBackToCheckInForm()"> Back </button>
 </div>

@@ -1,3 +1,12 @@
 <p>
-  <igx-grid #monitorGrid [data] = "VisitorsQueue" id="monitorGrid" [autoGenerate]="true"></igx-grid>
+  <igx-grid #monitorGrid [data]="VisitorsQueue" id="monitorGrid" [displayDensity]="'cosy'" [primaryKey]="'id'">
+    <igx-column [pinned]="true" [filterable]="false" [editable]="false">
+      <ng-template igxCell let-cell="cell" let-val>
+        <button igxButton (click)="deleteRow(cell.cellID.rowID)" >Delete</button>
+      </ng-template>
+    </igx-column>
+    <igx-column field="first_name" header="First name" [dataType]="'string'"></igx-column>
+    <igx-column field="last_name" header="Last name" [dataType]="'string'"></igx-column>
+    <igx-column field="phone" header="Phone" [dataType]="'string'" sortable="true"></igx-column>
+  </igx-grid>
 </p>
