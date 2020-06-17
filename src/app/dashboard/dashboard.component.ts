@@ -5,7 +5,7 @@ import { StoreOwner } from '../models/storeOwner'
 import { Router } from '@angular/router';
 import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
-import { IgxGridComponent, IGridEditEventArgs, IgxGridRowComponent } from 'igniteui-angular/';
+import { IgxGridComponent, IGridEditEventArgs, IgxDialogComponent } from 'igniteui-angular/';
 import { StoreService } from '../service/store.service'
 import { VisitorsDataGridService } from '../service/visitors-data-grid.service';
 
@@ -23,11 +23,14 @@ export class DashboardComponent implements OnInit {
   public store: Store;
   public visitors: Visitor[];
   public todayVisitors: Visitor[] = [];
+  public visitor : Visitor;
 
 
   
   @ViewChild('myGrid', { read: IgxGridComponent })
   public gridRowEdit: IgxGridComponent;
+  @ViewChild("dialogAdd", { read: IgxDialogComponent, static: true })
+  public dialog: IgxDialogComponent;
   
   constructor(public OAuth: AuthService, private router: Router, private storeService: StoreService, private visitorsGridService: VisitorsDataGridService) {
     
@@ -40,6 +43,7 @@ export class DashboardComponent implements OnInit {
     this.storeOwner = JSON.parse(localStorage.getItem('storeOwner'));
     this.store = JSON.parse(localStorage.getItem('store'));
     this.visitors = this.store.visitors;
+    this.visitor = new Visitor();
     this.visitors.map((visitor, index) => {
       visitor.id = index;
     });
@@ -61,9 +65,9 @@ export class DashboardComponent implements OnInit {
   initStream(){
     const stream = new EventSource('http://localhost:3000/stream');
     stream.onmessage =  (event) => {
-    this.store = JSON.parse(event.data);
-    localStorage.setItem('store', JSON.stringify(this.store[0])); 
-    this.visitors = this.store[0].visitors;
+    this.store = (JSON.parse(event.data))[0];
+    localStorage.setItem('store', JSON.stringify(this.store)); 
+    this.visitors = this.store.visitors;
     this.visitors.map((visitor, index) => {
         visitor.id = index;
       });
@@ -84,6 +88,18 @@ export class DashboardComponent implements OnInit {
     }    
   }
 
+  public addRow() {
+    this.visitor.time = new Date().toLocaleString();
+    this.storeService.addVisitoreToStore(this.visitor, this.store.id)
+      .subscribe(message => {
+      });
+    this.cancel();
+  }
+
+  public cancel() {
+    this.dialog.close();
+    this.visitor = new Visitor();
+  }
   
   logout() {
     localStorage.clear();

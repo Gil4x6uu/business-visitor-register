@@ -1,8 +1,10 @@
 <p>
   <igx-grid #monitorGrid [data]="VisitorsQueue" id="monitorGrid" [displayDensity]="'cosy'" [primaryKey]="'id'">
-    <igx-column [pinned]="true" [filterable]="false" [editable]="false">
+    <igx-column [pinned]="true" [filterable]="false" [editable]="false" width="100px">
       <ng-template igxCell let-cell="cell" let-val>
-        <button igxButton (click)="deleteRow(cell.cellID.rowID)" >Delete</button>
+        <button igxButton (click)="deleteRow(cell.cellID.rowID)" >
+          <igx-icon>delete</igx-icon>
+        </button>
       </ng-template>
     </igx-column>
     <igx-column field="first_name" header="First name" [dataType]="'string'"></igx-column>

@@ -12,9 +12,8 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { GoogleLoginProvider,  AuthService } from 'angularx-social-login';
 import { AuthServiceConfig } from 'angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {	IgxGridModule,	IgxAvatarModule,	IgxIconModule,	IgxButtonModule,	IgxRippleModule,	IgxCardModule,
-    IgxInputGroupModule    
- } from 'igniteui-angular';
+import { IgxGridModule, IgxAvatarModule, IgxIconModule, IgxButtonModule, IgxRippleModule, IgxCardModule, IgxInputGroupModule, IgxDialogModule } from 'igniteui-angular';
+    
 import { MonitorQueuesComponent } from './monitor-queues/monitor-queues.component';
 
 export function socialConfigs() {
@@ -49,7 +48,8 @@ export function socialConfigs() {
       IgxButtonModule,
       IgxRippleModule,
       IgxCardModule,
-      IgxInputGroupModule
+      IgxInputGroupModule,
+      IgxDialogModule 
    ],
    providers: [
       AuthService,
