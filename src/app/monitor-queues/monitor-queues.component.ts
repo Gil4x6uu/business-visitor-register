@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { IgxGridComponent, IRowDataEventArgs } from 'igniteui-angular';
 import { Visitor } from '../models/visitor';
 
@@ -12,14 +12,16 @@ export class MonitorQueuesComponent implements OnInit {
   public grid: IgxGridComponent;
   
   @Input() VisitorsQueue : Visitor[];
-  
+  @Output() visitorRemoveFromQueue = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit() {
   }
   
-  public deleteRow(rowID) {
-    this.grid.deleteRow(rowID);
+  
+  public deleteRow(rowID): void {
+  this.grid.deleteRow(rowID);
+    this.visitorRemoveFromQueue.emit(rowID);
   }
-
+ 
 }

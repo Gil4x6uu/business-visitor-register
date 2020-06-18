@@ -7,7 +7,6 @@ import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
 import { IgxGridComponent, IGridEditEventArgs, IgxDialogComponent } from 'igniteui-angular/';
 import { StoreService } from '../service/store.service'
-import { VisitorsDataGridService } from '../service/visitors-data-grid.service';
 
 
 @Component({
@@ -23,23 +22,28 @@ export class DashboardComponent implements OnInit {
   public store: Store;
   public visitors: Visitor[];
   public todayVisitors: Visitor[] = [];
-  public visitor : Visitor;
+  public nextVisitors: Visitor;
+  public visitor: Visitor;
+  public checkForDateInterval;
 
 
-  
+
   @ViewChild('myGrid', { read: IgxGridComponent })
   public gridRowEdit: IgxGridComponent;
   @ViewChild("dialogAdd", { read: IgxDialogComponent, static: true })
   public dialog: IgxDialogComponent;
-  
-  constructor(public OAuth: AuthService, private router: Router, private storeService: StoreService, private visitorsGridService: VisitorsDataGridService) {
-    
-   }
- 
-  
+
+  constructor(
+    public OAuth: AuthService,
+    private router: Router,
+    private storeService: StoreService,
+  ) {
+  }
+
+
   ngOnInit() {
     localStorage.setItem("lastKnownDate", new Date().toLocaleString())
-    setInterval(this.checkForDate, 50000);
+    this.checkForDateInterval = setInterval(this.checkForDate, 50000);
     this.storeOwner = JSON.parse(localStorage.getItem('storeOwner'));
     this.store = JSON.parse(localStorage.getItem('store'));
     this.visitors = this.store.visitors;
@@ -50,42 +54,43 @@ export class DashboardComponent implements OnInit {
     console.log(this.store);
     this.initStream();
   }
-  
-  editDone(event: IGridEditEventArgs){
-    const newRow =  event.newValue;
+
+  editDone(event: IGridEditEventArgs) {
+    const newRow = event.newValue;
     this.storeService.updateVisitoreToStore(newRow, this.store.id)
       .subscribe(store => {
         this.store = store[0];
         this.visitors = this.store.visitors;
+        this.visitors.map((visitor, index) => {
+          visitor.id = index;
+        });
         localStorage.setItem('store', JSON.stringify(this.store));
       })
   }
+
+  onVisitorRemoveFromQueue(rowId: number){
+    this.todayVisitors.splice(rowId,1);
+    this.nextVisitors = this.todayVisitors[0];
+  }
   
   
-  initStream(){
+  
+  
+  initStream() {
     const stream = new EventSource('http://localhost:3000/stream');
-    stream.onmessage =  (event) => {
-    this.store = (JSON.parse(event.data))[0];
-    localStorage.setItem('store', JSON.stringify(this.store)); 
-    this.visitors = this.store.visitors;
-    this.visitors.map((visitor, index) => {
+    stream.onmessage = (event) => {
+      this.store = (JSON.parse(event.data))[0];
+      localStorage.setItem('store', JSON.stringify(this.store));
+      this.visitors = this.store.visitors;
+      this.visitors.map((visitor, index) => {
         visitor.id = index;
       });
       const lastVisitor: Visitor = this.visitors[(this.visitors.length) - 1]
       this.todayVisitors = this.todayVisitors.slice();
       this.todayVisitors.push(lastVisitor);
+      this.nextVisitors = this.todayVisitors[0];
     }
-    
-  }
-  
-  checkForDate(){
-    const now = (new Date().toLocaleString().split(","))[0];
-    const lastKnownDate = (localStorage.getItem("lastKnownDate").split(","))[0];
-    console.log(`now is:${now} and last known date is:${lastKnownDate}`)
-    if(now != lastKnownDate){
-      console.log(`inside if statment ---- now is:${now} and last known date is:${lastKnownDate}`)
-      this.todayVisitors = [];
-    }    
+
   }
 
   public addRow() {
@@ -100,8 +105,19 @@ export class DashboardComponent implements OnInit {
     this.dialog.close();
     this.visitor = new Visitor();
   }
-  
+// Interval that checks if today become tomorrow
+  checkForDate() {
+    const now = (new Date().toLocaleString().split(","))[0];
+    const lastKnownDate = (localStorage.getItem("lastKnownDate").split(","))[0];
+    console.log(`now is:${now} and last known date is:${lastKnownDate}`)
+    if (now != lastKnownDate) {
+      console.log(`inside if statment ---- now is:${now} and last known date is:${lastKnownDate}`)
+      this.todayVisitors = [];
+    }
+  }
+
   logout() {
+    clearInterval(this.checkForDateInterval);
     localStorage.clear();
     this.OAuth.signOut().then(data => {
       this.router.navigate([`mainScreen`]);

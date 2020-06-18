@@ -20,7 +20,7 @@
     flex: 10%;
     
 }
-.logo{
+.title{
    flex: 90%;
    text-align: center;
 
@@ -42,13 +42,20 @@
 
 .right-main-panel{
         flex: 50%;
+        
 
 }
 igx-card{
-  
+    height: 280px;
     margin: 20px;
 }
 
+.visitor_grid__header{
+    h3{
+        text-align: center;
+    }
+    
+}
 .visitorsGrid{
  
     margin: 20px;
@@ -62,7 +69,13 @@ igx-card{
     margin: 10px;
     padding: 10px;
     #discontinued {
-        margin-top: 15px; 
+    margin-top: 15px; 
+    }
+}
+
+igx-input-group{
+    label{
+        font-size: 0.7em;
     }
 }
 
