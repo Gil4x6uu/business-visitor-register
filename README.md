@@ -5,7 +5,7 @@ A registration platform for businesses to handle, manage and control clients vis
 Platform enables business owners to keep track of customers with a virtual reception, monitor queues and reach the clients via a helpful landing page.
 ### Screen Shots:
 ![](src/assets/img/SS1.JPG)
-![](src/assets/img/SS-dash.JPG)
+![](src/assets/img/ss-dash.JPG)
 ### Installation and Setup Instructions:
 Clone down this repository. You will need [node](https:https://nodejs.org/en/) and [npm](https:https://nodejs.org/en/) installed globally on your machine. 
 
