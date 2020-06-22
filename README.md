@@ -8,6 +8,9 @@ Platform enables business owners to keep track of customers with a virtual recep
 ![](src/assets/img/SS1.JPG)
 #### DashBoard
 ![](src/assets/img/ss-dash.JPG)
+
+#### Responsive layout
+![](src/assets/img/main_screen_to_responsive.gif)
 ### Installation and Setup Instructions:
 Clone down this repository. You will need [node](https:https://nodejs.org/en/) and [npm](https:https://nodejs.org/en/) installed globally on your machine. 
 
