@@ -1,8 +1,12 @@
 <div class="wrapper">
   <header class="header">
     <div class="avatar-and-logout">
-      <igx-avatar [src]="storeOwner.picture" roundShape="true" size="large"></igx-avatar>
-      <span igxButton="raised" (click)="logout()">Sign Out </span>
+      <div class="avatar">
+        <igx-avatar [src]="storeOwner.picture" roundShape="true" size="large"></igx-avatar>
+      </div>
+      <div class="logout">
+        <span igxButton="raised" (click)="logout()">Sign Out </span>
+      </div>
     </div>
     <div class="title">
       <h1>Store DashBoard</h1>
@@ -11,7 +15,7 @@
   <div class="main-panel">
     <div class="left-main-panel">
       <div class="storeOwnerCard">
-        <igx-card>
+        <igx-card class="storDetails">
           <igx-card-header> Store details </igx-card-header>
           <igx-card-content>
             <ul>
@@ -33,7 +37,7 @@
       </div>
     </div>
     <div class="center-main-panel">
-      <igx-card>
+      <igx-card class="nextVisitor">
         <igx-card-header> Next visitor </igx-card-header>
         <igx-card-content *ngIf="nextVisitors">
           <ul>
@@ -55,7 +59,7 @@
       </igx-card>
     </div>
     <div class="right-main-panel">
-      <igx-card>
+      <igx-card #queueMonitor>
         <igx-card-header>Queue Monitor</igx-card-header>
         <igx-card-content>
           <app-monitor-queues [VisitorsQueue]="todayVisitors"

@@ -6,12 +6,6 @@
 @include igx-core();
 @include igx-theme($default-palette, $legacy-support: true);
 
-igx-grid-cell {
-  font-family: LibreBaskerville;
-}
-
-
-
 @font-face {
   font-family: "LibreBaskerville";
   src: url("./assets/fonts/LibreBaskerville/LibreBaskerville-Bold.ttf");

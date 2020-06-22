@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { IgxGridComponent, IRowDataEventArgs } from 'igniteui-angular';
+import { IgxGridComponent, IgxListComponent } from 'igniteui-angular';
 import { Visitor } from '../models/visitor';
 
 @Component({
@@ -8,9 +8,9 @@ import { Visitor } from '../models/visitor';
   styleUrls: ['./monitor-queues.component.scss']
 })
 export class MonitorQueuesComponent implements OnInit {
-  @ViewChild('monitorGrid', { read: IgxGridComponent })
-  public grid: IgxGridComponent;
-  
+  @ViewChild("queueMonitor", { static: true })
+  public list: IgxListComponent;
+
   @Input() VisitorsQueue : Visitor[];
   @Output() visitorRemoveFromQueue = new EventEmitter<boolean>();
   constructor() { }
@@ -20,8 +20,9 @@ export class MonitorQueuesComponent implements OnInit {
   
   
   public deleteRow(rowID): void {
-  this.grid.deleteRow(rowID);
     this.visitorRemoveFromQueue.emit(rowID);
   }
+  
+
  
 }

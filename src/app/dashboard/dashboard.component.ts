@@ -70,6 +70,7 @@ export class DashboardComponent implements OnInit {
 
   onVisitorRemoveFromQueue(rowId: number){
     this.todayVisitors.splice(rowId,1);
+    this.todayVisitors  = this.todayVisitors.slice();
     this.nextVisitors = this.todayVisitors[0];
   }
   

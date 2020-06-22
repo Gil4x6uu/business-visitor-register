@@ -1,7 +1,4 @@
 @import '~igniteui-angular/lib/core/styles/themes/index';
-.container-fluid > * {
-    margin-top: 32px;
-}
 
 .input-group-form {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
@@ -9,27 +6,42 @@
     padding: 12px;
 }
 
-.checkInCard{
-    margin: 20px;
-}
+
 
 igx-icon{
     margin-bottom: 10px;
     size: 120px;
 }
 
-.input-group-form {
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
-    padding: 12px;
-    margin-bottom: 24px;
-}
-
 label{
     font-size: small;
     margin-bottom: 5px;
 }
-igx-card-header{
-    
+
+.form-igxButton{
+    button{
+        width:12rem
+    }
+}
+.form-igxButton-small-screen{
+    button{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+        .form-igxButton{
+        button{
+            width:10rem;
+            display: none;
+        }
+    }
+    .form-igxButton-small-screen{
+        button{
+            display: block;
+            width:10rem;
+        }
+    }
 }
 
 

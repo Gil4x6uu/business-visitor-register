@@ -6,10 +6,7 @@ font-family: LibreBaskerville;
 .header {
   padding: 5px;
   text-align: center;
-  background-color: #2f2e33;
-  font-family:'Arial Narrow Bold';
-  color: white;
-  
+  background-color: #2f2e33;  
 }
 .footer {
   padding: 20px;
@@ -21,61 +18,52 @@ font-family: LibreBaskerville;
   display: flex;
   flex-flow: column wrap;
 }
-.content{
+.features{
   display: flex;
-  flex:100%;
   flex-flow: row nowrap;
+  justify-content: space-around;
   background: #d5d6d2;
   width: 100%;
   height: auto;
+  padding: 0.75rem;
 }
-.content-left {
-      flex: 50%;
-       padding-top: 10px;
-       
-           .logo{
-                float: right;
-             }   
-}
-
-.content-right{
-  flex: 50%;
-  padding-top: 10px;
+.left-features {
+  border-style: solid;
+  border-width: 5px;
+  border-color: tomato;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);             
+  padding: 2rem;
 }
 
-igx-card{
-  width:100%;
-  height: auto;
-  background-color:#d5d6d2 ;
-  
-              igx-card-header{
-                font-size: x-large;
-             }
-             ul{
-                font-size: large;
-                line-height: 2em;
-              }
+.right-features{
+ 
+  border-style: solid;
+  border-width: 5px;
+  border-color: #3a5199;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 2rem;
 }
 
 .aside{
   position: relative;
-    display: flex;
-    flex: 100%;
-    flex-flow: row ;
-    text-align: center;
+  display: flex;
+  flex: 100%;
+  flex-flow: row ;
+  text-align: center;
+  align-items:baseline;
 }
 
 .aside-1 {
    position: relative;
    background-color:tomato; 
-  flex: 50%; 
+   flex: 50%; 
 }
 
 .aside-2 {
    position: relative;
-       background-color: #3a5199; 
-
+   background-color: #3a5199; 
    flex: 50%;
+   
 }
 .login-button{
   position: absolute;
@@ -85,7 +73,7 @@ igx-card{
 }
 .check-in-input{
   position: absolute;
-  top: 65%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -94,19 +82,39 @@ igx-card{
   max-width: 100%;
   height: auto;
 }
+ul{
+   list-style-image: url('../../assets/img/ul-icon.png');
+}
 
+h4{
+  margin-bottom: 1rem;
+}
 
 
 @media screen and (max-width: 800px) {
-  .content {   
+  .features {   
     flex-flow: column wrap;
+    
   }
   .aside{
     flex-flow: column wrap ;
   }
+  .aside-2{
+    margin-top: 10px;
+  }
+  .aside-1{
+    margin-top: 10px;
+  }
+  .right-features{
+    margin-top: 10px;
+  }
+  
   .check-in-input{
-    width: 50%;
+    width: 30%;
     height: auto;
+  }
+  .logo{
+    width: 95%;
   }
 }
 

@@ -10,21 +10,33 @@
 
 .header {
   display: flex;
+  flex-flow: row nowrap;
   background-color: #2f2e33;
   font-family:'Arial Narrow Bold';
   color: white;
+                  .title{
+                   flex: 90%;
+                   text-align: center;
+
+                }
+
+                .avatar-and-logout{
+                   display: flex;
+                   flex-flow: column wrap;
+                   flex: 10%;
+                   align-content: space-between;
+                        .avatar{
+                            flex: 50%;   
+                            
+                        }
+                        .logout{
+                            flex: 50%;
+      
+                        }
+                }
   
 }
 
-.avatar-and-logout{
-    flex: 10%;
-    
-}
-.title{
-   flex: 90%;
-   text-align: center;
-
-}
 
 .main-panel{
     display: flex;
@@ -38,16 +50,21 @@
     flex:25%;
 }
 
-
-
 .right-main-panel{
         flex: 50%;
         
 
 }
 igx-card{
-    height: 280px;
-    margin: 20px;
+    margin: 20px;   
+}
+
+igx-card.nextVisitor{
+    height: 200px;
+}
+
+igx-card.storDetails{
+    height: 200px;
 }
 
 .visitor_grid__header{
@@ -103,7 +120,12 @@ $new-grid-theme: igx-grid-theme(
 @include igx-card($colorful-card);
 @include igx-grid($new-grid-theme);
 
+@media screen and (max-width: 800px) {
+  .main-panel {   
+    flex-flow: column wrap;
+  }
 
+}
 
 
 

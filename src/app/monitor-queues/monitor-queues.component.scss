@@ -1,0 +1,30 @@
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+.list {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+      
+}
+
+.visitor-first_name{
+     font-weight: 600;
+}
+
+.visitor-phone {
+  font-size: 0.875em;
+}
+
+$custom-icon-theme: igx-icon-theme(
+  $color: #ff1e00,
+  $disabled-color: #494949
+);
+
+:host {
+     ::ng-deep {
+        @include igx-icon($custom-icon-theme);
+        igx-icon{
+          font-size: 1.5 rem;
+        }
+    }
+}
