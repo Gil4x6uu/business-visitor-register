@@ -3,8 +3,14 @@
 ## COVID-19 client registration platform
 A registration platform for businesses to handle, manage and control clients visits of physical stores.
 Platform enables business owners to keep track of customers with a virtual reception, monitor queues and reach the clients via a helpful landing page.
-### Screen Shot:
+### Screen Shots:
+#### Main page
 ![](src/assets/img/SS1.JPG)
+#### DashBoard
+![](src/assets/img/ss-dash.JPG)
+
+#### Responsive layout
+![](src/assets/img/main_screen_to_responsive.gif)
 ### Installation and Setup Instructions:
 Clone down this repository. You will need [node](https:https://nodejs.org/en/) and [npm](https:https://nodejs.org/en/) installed globally on your machine. 
 
