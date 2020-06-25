@@ -59,28 +59,35 @@ export class DashboardComponent implements OnInit {
     const newRow = event.newValue;
     this.storeService.updateVisitoreToStore(newRow, this.store.id)
       .subscribe(store => {
-        this.store = store[0];
-        this.visitors = this.store.visitors;
-        this.visitors.map((visitor, index) => {
-          visitor.id = index;
-        });
-        localStorage.setItem('store', JSON.stringify(this.store));
+        if (store === undefined) {
+          alert("Something is worng you are logut");
+          this.logout();
+        }
+        else {
+          this.store = store[0];
+          this.visitors = this.store.visitors;
+          this.visitors.map((visitor, index) => {
+            visitor.id = index;
+          });
+          localStorage.setItem('store', JSON.stringify(this.store));
+        }
+
       })
   }
 
-  onVisitorRemoveFromQueue(rowId: number){
-    this.todayVisitors.splice(rowId,1);
-    this.todayVisitors  = this.todayVisitors.slice();
+  onVisitorRemoveFromQueue(rowId: number) {
+    this.todayVisitors.splice(rowId, 1);
+    this.todayVisitors = this.todayVisitors.slice();
     this.nextVisitors = this.todayVisitors[0];
   }
-  
-  
-  
-  
+
+
+
+
   initStream() {
     const stream = new EventSource('http://localhost:3000/stream');
     stream.onmessage = (event) => {
-      if (event.data !== "null"){
+      if (event.data !== "null") {
         this.store = (JSON.parse(event.data))[0];
         localStorage.setItem('store', JSON.stringify(this.store));
         this.visitors = this.store.visitors;
@@ -91,12 +98,12 @@ export class DashboardComponent implements OnInit {
         this.todayVisitors = this.todayVisitors.slice();
         this.todayVisitors.push(lastVisitor);
         this.nextVisitors = this.todayVisitors[0];
-    }
-    else{
+      }
+      else {
         alert("No Access - please log in again -  visitor not added");
         this.logout();
+      }
     }
-  }
 
   }
 
@@ -112,7 +119,7 @@ export class DashboardComponent implements OnInit {
     this.dialog.close();
     this.visitor = new Visitor();
   }
-// Interval that checks if today become tomorrow
+  // Interval that checks if today become tomorrow
   checkForDate() {
     const now = (new Date().toLocaleString().split(","))[0];
     const lastKnownDate = (localStorage.getItem("lastKnownDate").split(","))[0];

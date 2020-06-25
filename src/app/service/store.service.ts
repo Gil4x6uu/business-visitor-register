@@ -11,14 +11,14 @@ import { StoreOwner } from '../models/storeOwner';
 })
 
 export class StoreService {
-private storeUrl = 'http://localhost:3000';  // URL to web api
-store :Store;
+  private storeUrl = 'http://localhost:3000';  // URL to web api
+  store: Store;
 
-constructor(
-  private http: HttpClient
-) { }
-   
-    
+  constructor(
+    private http: HttpClient
+  ) { }
+
+
   getStores(): Observable<Store[]> {
     return this.http.get<Store[]>(`${this.storeUrl}/getstores`)
       .pipe(
@@ -26,28 +26,35 @@ constructor(
         catchError(this.handleError<Store[]>('getstores', []))
       );
   }
-  
-  getStoreById(id: Number): Observable<StoreOwner>{
-      const params =  new HttpParams().set('id' , id.toString());
-    return this.http.get<StoreOwner>(`${this.storeUrl}/getStoresById`, {params})
+
+  getStoreById(id: Number): Observable<StoreOwner> {
+    const params = new HttpParams().set('id', id.toString());
+    return this.http.get<StoreOwner>(`${this.storeUrl}/getStoresById`, { params })
       .pipe(
         tap(_ => console.log('fetched Store by ID')),
         catchError(this.handleError<StoreOwner>('getStoresById/:' + id))
       );
   }
-  
-  
-  
-  addVisitoreToStore(visitor: Visitor, storeId: Number): Observable<Store> {
-    
-    return this.http.post<Store>(`${this.storeUrl}/addVisitorToStore`, {'visitor':visitor, 'storeId': storeId})
-    .pipe(
-      tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),
-      catchError(this.handleError<Store>('addVisitorToStore: ' + visitor.id))
-    );     
+
+  addStoreClientToStore(visitor: Visitor, storeId: Number): Observable<Store> {
+
+    return this.http.post<Store>(`${this.storeUrl}/addStoreClientToStore`, { 'visitor': visitor, 'storeId': storeId })
+      .pipe(
+        tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),
+        catchError(this.handleError<Store>('addVisitorToStore: ' + visitor.id))
+      );
   }
-  
-  
+
+  addVisitoreToStore(visitor: Visitor, storeId: Number): Observable<Store> {
+
+    return this.http.post<Store>(`${this.storeUrl}/addVisitorToStore`, { 'visitor': visitor, 'storeId': storeId })
+      .pipe(
+        tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),
+        catchError(this.handleError<Store>('addVisitorToStore: ' + visitor.id))
+      );
+  }
+
+
   updateVisitoreToStore(visitor: Visitor, storeId: Number): Observable<Store> {
 
     return this.http.post<Store>(`${this.storeUrl}/updateVisitorToStore`, { 'visitor': visitor, 'storeId': storeId })
@@ -70,7 +77,7 @@ constructor(
       return of(result as T);
     };
 
-}
+  }
 }
 
 

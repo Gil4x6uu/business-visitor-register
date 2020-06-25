@@ -17,6 +17,8 @@ export class StoreCheckInComponent implements OnInit {
   visitorInfo: Visitor;
   todayTime: Date;
   thankYou: boolean;
+  worngStoreId: boolean;
+  labelText: string  = "ID";
   constructor(
     private storeService: StoreService,
     private formBuilder: FormBuilder
@@ -40,6 +42,14 @@ export class StoreCheckInComponent implements OnInit {
      this.storeService.getStoreById(id)
     .subscribe(store =>{
       this.store = store[0];
+      if (this.store === undefined )
+      {
+        this.labelText = "Worng Store ID";
+        this.storeId = null;
+      }
+      else{
+        this.labelText = "ID";
+      }
     }) 
   }
   
@@ -55,10 +65,9 @@ export class StoreCheckInComponent implements OnInit {
       return;
     }
     else {
-      //this.registered = true;
       this.visitorInfo = new Visitor(this.userForm.value);
       this.visitorInfo.time = new Date().toLocaleString();
-      this.storeService.addVisitoreToStore(this.visitorInfo, this.store.id)
+      this.storeService.addStoreClientToStore(this.visitorInfo, this.store.id)
       .subscribe(message => {           
         });
       this.thankYou = true;

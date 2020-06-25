@@ -73,10 +73,9 @@ app.get('/getStoresById', (req, res) => {
 
 
 app.post('/addVisitorToStore', (req, res) => {
-    const decoded = jwt.verify(req.headers.authorization, privateKey);
     const storeId = req.body.storeId;
     const visitor = req.body.visitor;
-    verifyToken(storeId, decoded)
+    verifyToken(storeId, req.headers.authorization)
         .then((result) => {
             if (result) {
                 addVisitorToStore(visitor, storeId)
@@ -98,25 +97,48 @@ app.post('/addVisitorToStore', (req, res) => {
 
 })
 
+app.post('/addStoreClientToStore', (req, res) => {
+    const storeId = req.body.storeId;
+    const visitor = req.body.visitor;
+    addVisitorToStore(visitor, storeId)
+        .then((result) => {
+            getStoreById(result.value.id)
+                .then((result) => {
+                    sse.send(result);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        })
+})
+
 app.post('/updateVisitorToStore', (req, res) => {
-    const collection = db.collection('storesDeatails');
-    collection.updateOne({ id: req.body.storeId },
-        { $set: { [`visitors.${req.body.visitor.id}`]: req.body.visitor } }, (err, message) => {
-            if (message.result.ok === 1) {
-                getStoreById(req.body.storeId)
-                    .then((result) => {
-                        res.send(result);
+    verifyToken(req.body.storeId, req.headers.authorization)
+        .then((result) => {
+            if (result) {
+                const collection = db.collection('storesDeatails');
+                collection.updateOne({ id: req.body.storeId },
+                    { $set: { [`visitors.${req.body.visitor.id}`]: req.body.visitor } }, (err, message) => {
+                        if (message.result.ok === 1) {
+                            getStoreById(req.body.storeId)
+                                .then((result) => {
+                                    res.send(result);
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                })
+
+
+                        }
+                        else {
+
+                        }
+
                     })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-
-
             }
-            else {
-
+            else{
+                res.send("NO ACESS")
             }
-
         })
 
 });
@@ -165,8 +187,9 @@ app.post('/Login/Savesresponse', (req, res) => {
 app.get('/stream', sse.init);
 
 async function verifyToken(storeId, token) {
+    const decodedToken = jwt.verify(token, privateKey);
     const storeOwnersCollection = db.collection('storeOwners');
-    return storeOwnersCollection.findOne({ $and: [{ store_id: storeId }, { id: token.data}]})
+    return storeOwnersCollection.findOne({ $and: [{ store_id: storeId }, { id: decodedToken.data }] })
 }
 
 async function validateTokenAndGetGoogleUserInfo(token) {

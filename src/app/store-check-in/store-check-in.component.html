@@ -3,7 +3,7 @@
     <div class="form-group">
       <igx-input-group>
         <input igxInput name="storeId" type="text" [(ngModel)]="storeId" required="required" />
-        <label igxLabel for="storeId">ID</label>
+        <label igxLabel for="storeId">{{this.labelText}}</label>
       </igx-input-group>
     </div>
     <div class="form-igxButton">
@@ -13,6 +13,10 @@
       <button igxButton="outlined" (click)="getStoreById(storeId)">Check in</button>
     </div>
   </form>
+</div>
+<div class="worng-store-id" *ngIf="worngStoreId">
+  <span>Worng store ID<br> 
+   Please try again </span>
 </div>
 <div *ngIf="store && !thankYou">
   <div class="checkInCard">
