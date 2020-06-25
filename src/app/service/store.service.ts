@@ -17,14 +17,8 @@ store :Store;
 constructor(
   private http: HttpClient
 ) { }
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'text' },)
-  };
-  
-  
-  
-  
+   
+    
   getStores(): Observable<Store[]> {
     return this.http.get<Store[]>(`${this.storeUrl}/getstores`)
       .pipe(
@@ -45,7 +39,7 @@ constructor(
   
   
   addVisitoreToStore(visitor: Visitor, storeId: Number): Observable<Store> {
-
+    
     return this.http.post<Store>(`${this.storeUrl}/addVisitorToStore`, {'visitor':visitor, 'storeId': storeId})
     .pipe(
       tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),

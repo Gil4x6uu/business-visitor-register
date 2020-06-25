@@ -20,6 +20,9 @@ const google = require('googleapis').google;
 const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2();
 
+const jwt = require('jsonwebtoken');
+const privateKey = "I love Ela and Berry"
+
 
 const SSE = require('express-sse');
 const sse = new SSE();
@@ -70,22 +73,30 @@ app.get('/getStoresById', (req, res) => {
 
 
 app.post('/addVisitorToStore', (req, res) => {
+    const decoded = jwt.verify(req.headers.authorization, privateKey);
     const storeId = req.body.storeId;
     const visitor = req.body.visitor;
-    addVisitorToStore(visitor, storeId)
+    verifyToken(storeId, decoded)
         .then((result) => {
-            getStoreById(result.value.id)
-                .then((result) => {
-                    sse.send(result);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+            if (result) {
+                addVisitorToStore(visitor, storeId)
+                    .then((result) => {
+                        getStoreById(result.value.id)
+                            .then((result) => {
+                                sse.send(result);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            })
+                    })
+            }
+            else {
+                sse.send(result);
+            }
+
         })
-});
 
-        
-
+})
 
 app.post('/updateVisitorToStore', (req, res) => {
     const collection = db.collection('storesDeatails');
@@ -117,6 +128,7 @@ app.post('/Login/Savesresponse', (req, res) => {
     validateTokenAndGetGoogleUserInfo({ access_token: req.body.authToken })
         .then((googleResult) => {
             if (googleResult.status == 200) {
+                const token = jwt.sign({ data: googleResult.data.id }, privateKey, { expiresIn: '1h' });
                 storeOwnersCollection.findOne({ id: googleResult.data.id })
                     .then((doc) => {
                         if (!doc) {
@@ -131,7 +143,7 @@ app.post('/Login/Savesresponse', (req, res) => {
                                     storeDoc.visitorsCount = 0;
                                     storeDoc.visitors = [];
                                     storesDeatailsCollection.insertOne(storeDoc);
-                                    res.send([userDoc, storeDoc]);
+                                    res.send([userDoc, storeDoc, token]);
                                 })
 
 
@@ -139,18 +151,23 @@ app.post('/Login/Savesresponse', (req, res) => {
                         else {
                             storesDeatailsCollection.findOne({ id: doc.store_id })
                                 .then((storeDoc) => {
-                                    res.send([doc, storeDoc]);
+                                    res.send([doc, storeDoc, token]);
                                 });
                         }
                     })
             }
-            else{
+            else {
                 console.log("NO ACCESS")
             }
         })
 });
 
 app.get('/stream', sse.init);
+
+async function verifyToken(storeId, token) {
+    const storeOwnersCollection = db.collection('storeOwners');
+    return storeOwnersCollection.findOne({ $and: [{ store_id: storeId }, { id: token.data}]})
+}
 
 async function validateTokenAndGetGoogleUserInfo(token) {
     oauth2Client.setCredentials(token);

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VisitorsFormComponent } from './visitors-form/visitors-form.component';
 import { StoreCheckInComponent } from './store-check-in/store-check-in.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
@@ -25,6 +25,8 @@ import {
 	IgxDialogModule
 } from 'igniteui-angular';
 import { MonitorQueuesComponent } from './monitor-queues/monitor-queues.component';
+import { AuthInterceptor } from'./_helpers/AuthInterceptor'
+
 export function socialConfigs() {
     const config = new AuthServiceConfig([
         {
@@ -67,7 +69,8 @@ export function socialConfigs() {
         {
             provide: AuthServiceConfig,
             useFactory: socialConfigs
-        }
+        },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor , multi: true }
     ],
     bootstrap: [
         AppComponent

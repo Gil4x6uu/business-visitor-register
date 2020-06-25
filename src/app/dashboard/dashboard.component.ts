@@ -80,17 +80,23 @@ export class DashboardComponent implements OnInit {
   initStream() {
     const stream = new EventSource('http://localhost:3000/stream');
     stream.onmessage = (event) => {
-      this.store = (JSON.parse(event.data))[0];
-      localStorage.setItem('store', JSON.stringify(this.store));
-      this.visitors = this.store.visitors;
-      this.visitors.map((visitor, index) => {
-        visitor.id = index;
-      });
-      const lastVisitor: Visitor = this.visitors[(this.visitors.length) - 1]
-      this.todayVisitors = this.todayVisitors.slice();
-      this.todayVisitors.push(lastVisitor);
-      this.nextVisitors = this.todayVisitors[0];
+      if (event.data !== "null"){
+        this.store = (JSON.parse(event.data))[0];
+        localStorage.setItem('store', JSON.stringify(this.store));
+        this.visitors = this.store.visitors;
+        this.visitors.map((visitor, index) => {
+          visitor.id = index;
+        });
+        const lastVisitor: Visitor = this.visitors[(this.visitors.length) - 1]
+        this.todayVisitors = this.todayVisitors.slice();
+        this.todayVisitors.push(lastVisitor);
+        this.nextVisitors = this.todayVisitors[0];
     }
+    else{
+        alert("No Access - please log in again -  visitor not added");
+        this.logout();
+    }
+  }
 
   }
 
