@@ -13,27 +13,22 @@
   display: flex;
   flex-flow: row nowrap;
   background-color: #2f2e33;
-  font-family:'Arial Narrow Bold';
   color: white;
+  justify-content: space-between;
                   .title{
-                   flex: 90%;
-                   text-align: center;
-
+                   display: flex; 
+                   flex-flow: row nowrap; 
+                   align-items: flex-end; 
+                   color: white;
+                   font-size: 4rem;
+                   font-weight: 800;
                 }
-
                 .avatar-and-logout{
-                   display: flex;
-                   flex-flow: column wrap;
-                   flex: 10%;
-                   align-content: space-between;
                         .avatar{
-                            flex: 50%;   
-                            
-                        }
-                        .logout{
-                            flex: 50%;
-      
-                        }
+                            flex: 100%;
+                     
+                       }
+
                 }
   
 }
@@ -44,18 +39,20 @@
     background-color: #d5d6d2;
 }
 .left-main-panel{
-    flex: 25%;
+    flex: 33%;
 }
 
 .center-main-panel{
-    flex:25%;
+    flex:33%;
 }
 
 .right-main-panel{
-        flex: 50%;
+        flex: 34%;
         
 
 }
+
+
 igx-card{
     margin: 20px;   
 }
@@ -67,7 +64,30 @@ igx-card.nextVisitor{
 igx-card.storDetails{
     height: 200px;
 }
+igx-card.avatar-and-logout{
+    background: #2f2e33;
+}
+.avatar-img{ 
+  vertical-align: middle;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
 
+.logout-button{
+        transition-duration: 1s;
+        border: none;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: 100%;
+        height: 100%;
+    }
+.logout-button:hover{
+        background-color: #474747;
+    }
+    
+    
 .visitor_grid__header{
     h3{
         text-align: center;
@@ -127,6 +147,7 @@ $new-grid-theme: igx-grid-theme(
   }
 
 }
+
 
 
 

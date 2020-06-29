@@ -5,7 +5,7 @@ import { StoreOwner } from '../models/storeOwner'
 import { Router } from '@angular/router';
 import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
-import { IgxGridComponent, IGridEditEventArgs, IgxDialogComponent } from 'igniteui-angular/';
+import { IgxGridComponent, IGridEditEventArgs, IgxDialogComponent, IgxToggleModule  } from 'igniteui-angular/';
 import { StoreService } from '../service/store.service'
 
 

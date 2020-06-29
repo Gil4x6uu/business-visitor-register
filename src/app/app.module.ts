@@ -22,7 +22,8 @@ import {
 	IgxRippleModule,
 	IgxCardModule,
 	IgxInputGroupModule,
-	IgxDialogModule
+    IgxDialogModule, 
+    IgxToggleModule 
 } from 'igniteui-angular';
 import { MonitorQueuesComponent } from './monitor-queues/monitor-queues.component';
 import { AuthInterceptor } from'./_helpers/AuthInterceptor'
@@ -62,7 +63,8 @@ export function socialConfigs() {
         IgxCardModule,
         IgxInputGroupModule,
         IgxDialogModule,
-        IgxListModule
+        IgxListModule,
+        IgxToggleModule 
     ],
     providers: [
         AuthService,
