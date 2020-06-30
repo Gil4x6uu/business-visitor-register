@@ -27,6 +27,7 @@ import {
 } from 'igniteui-angular';
 import { MonitorQueuesComponent } from './monitor-queues/monitor-queues.component';
 import { AuthInterceptor } from'./_helpers/AuthInterceptor'
+import { VisitorsGridComponent } from './visitors-grid/visitors-grid.component';
 
 export function socialConfigs() {
     const config = new AuthServiceConfig([
@@ -38,36 +39,37 @@ export function socialConfigs() {
     return config;
 }
 @NgModule({
-    declarations: [
-        AppComponent,
-        VisitorsFormComponent,
-        StoreCheckInComponent,
-        LoginComponent,
-        DashboardComponent,
-        MainScreenComponent,
-        MonitorQueuesComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        IgxGridModule,
-        BrowserAnimationsModule,
-        IgxAvatarModule,
-        IgxIconModule,
-        IgxButtonModule,
-        IgxButtonGroupModule,
-        IgxRippleModule,
-        IgxCardModule,
-        IgxInputGroupModule,
-        IgxDialogModule,
-        IgxListModule,
-        IgxToggleModule 
-    ],
-    providers: [
-        AuthService,
+   declarations: [
+      AppComponent,
+      VisitorsFormComponent,
+      StoreCheckInComponent,
+      LoginComponent,
+      DashboardComponent,
+      MainScreenComponent,
+      MonitorQueuesComponent,
+      VisitorsGridComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      IgxGridModule,
+      BrowserAnimationsModule,
+      IgxAvatarModule,
+      IgxIconModule,
+      IgxButtonModule,
+      IgxButtonGroupModule,
+      IgxRippleModule,
+      IgxCardModule,
+      IgxInputGroupModule,
+      IgxDialogModule,
+      IgxListModule,
+      IgxToggleModule  
+   ],
+   providers: [
+      AuthService,
         {
             provide: AuthServiceConfig,
             useFactory: socialConfigs

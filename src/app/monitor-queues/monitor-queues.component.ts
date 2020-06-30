@@ -22,7 +22,5 @@ export class MonitorQueuesComponent implements OnInit {
   public deleteRow(rowID): void {
     this.visitorRemoveFromQueue.emit(rowID);
   }
-  
-
- 
+   
 }

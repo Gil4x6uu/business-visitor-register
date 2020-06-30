@@ -5,7 +5,7 @@ import { StoreOwner } from '../models/storeOwner'
 import { Router } from '@angular/router';
 import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
-import { IgxGridComponent, IGridEditEventArgs, IgxDialogComponent, IgxToggleModule  } from 'igniteui-angular/';
+import {  IGridEditEventArgs, IgxDialogComponent } from 'igniteui-angular/';
 import { StoreService } from '../service/store.service'
 
 
@@ -28,8 +28,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  @ViewChild('myGrid', { read: IgxGridComponent })
-  public gridRowEdit: IgxGridComponent;
+ 
   @ViewChild("dialogAdd", { read: IgxDialogComponent, static: true })
   public dialog: IgxDialogComponent;
 
@@ -55,30 +54,16 @@ export class DashboardComponent implements OnInit {
     this.initStream();
   }
 
-  editDone(event: IGridEditEventArgs) {
-    const newRow = event.newValue;
-    this.storeService.updateVisitoreToStore(newRow, this.store.id)
-      .subscribe(store => {
-        if (store === undefined) {
-          alert("Something is worng you are logut");
-          this.logout();
-        }
-        else {
-          this.store = store[0];
-          this.visitors = this.store.visitors;
-          this.visitors.map((visitor, index) => {
-            visitor.id = index;
-          });
-          localStorage.setItem('store', JSON.stringify(this.store));
-        }
 
-      })
-  }
 
   onVisitorRemoveFromQueue(rowId: number) {
     this.todayVisitors.splice(rowId, 1);
     this.todayVisitors = this.todayVisitors.slice();
     this.nextVisitors = this.todayVisitors[0];
+  }
+  
+  onLogoutEmit(){
+    this.logout();
   }
 
 

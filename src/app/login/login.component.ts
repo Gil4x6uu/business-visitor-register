@@ -11,6 +11,7 @@ import { Store } from '../models/store';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: [SocialloginService]
   
 })
 export class LoginComponent implements OnInit {

@@ -1,0 +1,26 @@
+<igx-grid #myGrid [displayDensity]="'cosy'" [data]="visitors" [paging]="true" [perPage]="10" [primaryKey]="'id'"
+  width="100%" height="auto" (onRowEdit)="editDone($event)" [rowEditable]="true">
+  <igx-column field="id" header="Id" editable="false" sortable="true"></igx-column>
+  <igx-column field="first_name" header="First name" [dataType]="'string'"></igx-column>
+  <igx-column field="last_name" header="Last name" [dataType]="'string'"></igx-column>
+  <igx-column field="phone" header="Phone" [dataType]="'string'" sortable="true"></igx-column>
+  <igx-column field="email" header="Email" [dataType]="'string'"></igx-column>
+  <igx-column field="time" header="Date and time" [dataType]="'string'" editable="false" sortable="true"
+    [resizable]="true">
+  </igx-column>
+  <ng-template igxCellEditor let-cell="cell">
+    <igx-input-group>
+      <input igxInput [igxFocus]='true' name="units" [(ngModel)]="cell.editValue" style="color: black" />
+    </igx-input-group>
+  </ng-template>
+  <ng-template igxRowEditActions let-endEdit>
+    <div class="custom-buttons">
+      <button igxButton="icon" class="custom-button" igxRowEditTabStop (click)="endEdit(false)">
+        <igx-icon>clear</igx-icon>
+      </button>
+      <button igxButton="icon" class="custom-button" igxRowEditTabStop (click)="endEdit(true)">
+        <igx-icon>check</igx-icon>
+      </button>
+    </div>
+  </ng-template>
+</igx-grid>
