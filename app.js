@@ -91,9 +91,11 @@ app.post('/addVisitorToStore', (req, res) => {
             }
             else {
                 sse.send(result);
+                
             }
 
         })
+        res.end();
 
 })
 

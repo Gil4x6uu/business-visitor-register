@@ -36,15 +36,6 @@ export class StoreService {
       );
   }
 
-  addStoreClientToStore(visitor: Visitor, storeId: Number): Observable<Store> {
-
-    return this.http.post<Store>(`${this.storeUrl}/addStoreClientToStore`, { 'visitor': visitor, 'storeId': storeId })
-      .pipe(
-        tap(_ => console.log(`Visitor:${visitor.first_name} ${visitor.last_name} added to store with id:${storeId}`)),
-        catchError(this.handleError<Store>('addVisitorToStore: ' + visitor.id))
-      );
-  }
-
   addVisitoreToStore(visitor: Visitor, storeId: Number): Observable<Store> {
 
     return this.http.post<Store>(`${this.storeUrl}/addVisitorToStore`, { 'visitor': visitor, 'storeId': storeId })
