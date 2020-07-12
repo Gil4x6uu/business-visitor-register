@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { VisitorsFormComponent } from './visitors-form/visitors-form.component';
 import { StoreCheckInComponent } from './store-check-in/store-check-in.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -12,22 +11,20 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { GoogleLoginProvider, AuthService } from 'angularx-social-login';
 import { AuthServiceConfig } from 'angularx-social-login';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {
-	IgxButtonGroupModule,
-	IgxListModule,
-	IgxGridModule,
-	IgxAvatarModule,
-	IgxIconModule,
-	IgxButtonModule,
-	IgxRippleModule,
+import {IgxListModule,	IgxGridModule,	IgxIconModule,	IgxButtonModule, IgxRippleModule,
 	IgxCardModule,
 	IgxInputGroupModule,
     IgxDialogModule, 
     IgxToggleModule 
 } from 'igniteui-angular';
+
 import { MonitorQueuesComponent } from './monitor-queues/monitor-queues.component';
 import { AuthInterceptor } from'./_helpers/AuthInterceptor'
 import { VisitorsGridComponent } from './visitors-grid/visitors-grid.component';
+import { AvatarAndLogoutComponent } from './avatar-and-logout/avatar-and-logout.component';
+import { StoreOwnerCardComponent } from './store-owner-card/store-owner-card.component';
+import { NextVisitorComponent } from './next-visitor/next-visitor.component';
+import { CheckInFormComponent } from './check-in-form/check-in-form.component';
 
 export function socialConfigs() {
     const config = new AuthServiceConfig([
@@ -41,13 +38,16 @@ export function socialConfigs() {
 @NgModule({
    declarations: [
       AppComponent,
-      VisitorsFormComponent,
       StoreCheckInComponent,
       LoginComponent,
       DashboardComponent,
       MainScreenComponent,
       MonitorQueuesComponent,
-      VisitorsGridComponent
+      VisitorsGridComponent,
+      AvatarAndLogoutComponent,
+      StoreOwnerCardComponent,
+      NextVisitorComponent,
+      CheckInFormComponent
    ],
    imports: [
       BrowserModule,
@@ -57,16 +57,14 @@ export function socialConfigs() {
       HttpClientModule,
       IgxGridModule,
       BrowserAnimationsModule,
-      IgxAvatarModule,
       IgxIconModule,
       IgxButtonModule,
-      IgxButtonGroupModule,
       IgxRippleModule,
       IgxCardModule,
       IgxInputGroupModule,
       IgxDialogModule,
       IgxListModule,
-      IgxToggleModule  
+      IgxToggleModule
    ],
    providers: [
       AuthService,

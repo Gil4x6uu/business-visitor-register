@@ -1,11 +1,11 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { AuthService } from 'angularx-social-login';
 import { StoreOwner } from '../models/storeOwner'
 import { Router } from '@angular/router';
 import { Store } from '../models/store';
 import { Visitor } from '../models/visitor';
-import {  IGridEditEventArgs, IgxDialogComponent } from 'igniteui-angular/';
+import { IgxDialogComponent } from 'igniteui-angular/';
 import { StoreService } from '../service/store.service'
 
 
@@ -25,13 +25,7 @@ export class DashboardComponent implements OnInit {
   public nextVisitors: Visitor;
   public visitor: Visitor;
   public checkForDateInterval;
-
-
-
  
-  @ViewChild("dialogAdd", { read: IgxDialogComponent, static: true })
-  public dialog: IgxDialogComponent;
-
   constructor(
     public OAuth: AuthService,
     private router: Router,
@@ -55,6 +49,9 @@ export class DashboardComponent implements OnInit {
   }
 
 
+onStoreOwnerLoggedOut(){
+  this.logout();
+}
 
   onVisitorRemoveFromQueue(rowId: number) {
     this.todayVisitors.splice(rowId, 1);
@@ -101,7 +98,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public cancel() {
-    this.dialog.close();
+    //this.dialog.close();
     this.visitor = new Visitor();
   }
   // Interval that checks if today become tomorrow

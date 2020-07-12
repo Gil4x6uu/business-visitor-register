@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StoreService} from  '../service/store.service'
+import { StoreService } from '../service/store.service'
 import { Store } from '../models/store';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Visitor } from '../models/visitor';
 @Component({
   selector: 'app-store-check-in',
@@ -18,57 +17,57 @@ export class StoreCheckInComponent implements OnInit {
   todayTime: Date;
   thankYou: boolean;
   worngStoreId: boolean;
-  labelText: string  = "ID";
+  labelText: string = "ID";
   constructor(
     private storeService: StoreService,
     private formBuilder: FormBuilder
-    ) {
+  ) {
     this.userForm = this.formBuilder.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       phone: ['', [Validators.minLength(10), Validators.maxLength(10)]],
       email: ['', [Validators.email]],
     });
-    }
-   
+  }
 
-  
+
+
   getStores(): void {
     this.storeService.getStores()
       .subscribe(stores => this.stores = stores);
-   }
-   
-  getStoreById(id: Number): void{
-     this.storeService.getStoreById(id)
-    .subscribe(store =>{
-      this.store = store[0];
-      if (this.store === undefined )
-      {
-        this.labelText = "Worng Store ID";
-        this.storeId = null;
-      }
-      else{
-        this.labelText = "ID";
-      }
-    }) 
   }
-  
-  isStoreExicst(): void{
-    if(this.store){
-      
+
+  getStoreById(id: Number): void {
+    this.storeService.getStoreById(id)
+      .subscribe(store => {
+        this.store = store[0];
+        if (this.store === undefined) {
+          this.labelText = "Worng Store ID";
+          this.storeId = null;
+        }
+        else {
+          this.labelText = "ID";
+        }
+      })
+  }
+
+  isStoreExicst(): void {
+    if (this.store) {
+
     }
   }
-  
-  
+
+
   onSubmit() {
-      if (this.userForm.invalid == true) {
+    if (this.userForm.invalid == true) {
       return;
     }
     else {
       this.visitorInfo = new Visitor(this.userForm.value);
       this.visitorInfo.time = new Date().toLocaleString();
+
       this.storeService.addVisitoreToStore(this.visitorInfo, this.store.id)
-      .subscribe(message => {           
+        .subscribe(message => {
         });
       this.thankYou = true;
     }
@@ -79,7 +78,7 @@ export class StoreCheckInComponent implements OnInit {
     this.store = null;
     this.thankYou = false;
   }
-   
+
   ngOnInit() {
 
 

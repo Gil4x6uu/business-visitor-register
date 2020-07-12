@@ -1,8 +1,9 @@
 
-
-// CSS Reset, comment out if not required or using a different module
-// @import '~minireset.css/minireset';
 @import '~igniteui-angular/lib/core/styles/themes/index';
+$primary: #3a5199 !default;
+$secondary: white !default;
+
+$app-palette: igx-palette($primary, $secondary);
 @include igx-core();
 @include igx-theme($default-palette, $legacy-support: true);
 
@@ -16,4 +17,31 @@
   src: url("./assets/fonts/Kollektif/Kollektif.ttf");
 }
 
+
+
+$custom-button-theme: igx-button-theme(
+    $raised-text-color: #fdfdfd,
+    $raised-hover-text-color: #fdfdfd,
+    $raised-background: #345779,
+    $raised-hover-background: #2e4d6b,
+    $raised-focus-text-color: #fdfdfd,
+    $raised-focus-background: #2e4d6b,
+    $disabled-color: #2e4d6b
+);
+
+$colorful-card: igx-card-theme(
+    $background: #3a5199,
+    $header-text-color: #FEFEFE,
+    $subtitle-text-color: #2f2e33,
+    $content-text-color: #FEFEFE
+);
+$new-grid-theme: igx-grid-theme(
+  $row-odd-background: rgba(179,229,252 ,1),
+  $row-even-background: rgba(255,249,196 ,1),
+  $row-odd-text-color: rgba(50, 0, 100, .74),
+  $row-even-text-color: rgba(128, 33, 77, .74)
+);
+@include igx-button($custom-button-theme);
+@include igx-card($colorful-card);
+@include igx-grid($new-grid-theme);
 

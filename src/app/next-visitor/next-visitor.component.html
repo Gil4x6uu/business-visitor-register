@@ -1,0 +1,20 @@
+<igx-card class="nextVisitor">
+  <igx-card-header> Next visitor </igx-card-header>
+  <igx-card-content *ngIf="nextVisitors">
+    <ul>
+      <li>Full Name: {{nextVisitors.first_name}}, {{nextVisitors.last_name}} </li>
+      <li>Time Of Arrival: {{nextVisitors.time}}</li>
+    </ul>
+  </igx-card-content>
+  <igx-card-content *ngIf="!nextVisitors"> No Visitors at the moment </igx-card-content>
+  <igx-card-actions>
+    <div class="igx-card-actions__igroup--start">
+      <span igxButton="icon" igxRipple igxRippleCentered="true">
+        <igx-icon name="add"></igx-icon>
+      </span>
+      <span igxButton="icon" igxRipple igxRippleCentered="true">
+        <igx-icon name="star"></igx-icon>
+      </span>
+    </div>
+  </igx-card-actions>
+</igx-card>

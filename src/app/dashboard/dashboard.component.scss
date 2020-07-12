@@ -23,20 +23,22 @@
                    font-size: 4rem;
                    font-weight: 800;
                 }
-                .avatar-and-logout{
-                        .avatar{
-                            flex: 100%;
-                     
-                       }
-
-                }
-  
 }
+
+.avatar-and-logout{
+  display: flex; 
+  flex-flow: row nowrap; 
+  align-items: flex-end;
+  margin: 5px;                      
+ }
+                        
+     
 
 
 .main-panel{
     display: flex;
     background-color: #d5d6d2;
+    
 }
 .left-main-panel{
     flex: 33%;
@@ -57,37 +59,12 @@ igx-card{
     margin: 20px;   
 }
 
-igx-card.nextVisitor{
-    height: 200px;
-}
+
 
 igx-card.storDetails{
     height: 200px;
 }
-igx-card.avatar-and-logout{
-    background: #2f2e33;
-}
-.avatar-img{ 
-  vertical-align: middle;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-}
-
-.logout-button{
-        transition-duration: 1s;
-        border: none;
-        padding: 10px;
-        margin: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        width: 100%;
-        height: 100%;
-    }
-.logout-button:hover{
-        background-color: #474747;
-    }
-    
-    
+ 
 .visitor_grid__header{
     h3{
         text-align: center;
@@ -117,29 +94,7 @@ igx-input-group{
     }
 }
 
-$primary: #3a5199 !default;
-$secondary: white !default;
 
-$app-palette: igx-palette($primary, $secondary);
-
-@include igx-core();
-@include igx-theme($app-palette);
-
-
-$colorful-card: igx-card-theme(
-    $background: #3a5199,
-    $header-text-color: #FEFEFE,
-    $subtitle-text-color: #2f2e33,
-    $content-text-color: #FEFEFE
-);
-$new-grid-theme: igx-grid-theme(
-  $row-odd-background: rgba(179,229,252 ,1),
-  $row-even-background: rgba(255,249,196 ,1),
-  $row-odd-text-color: rgba(50, 0, 100, .74),
-  $row-even-text-color: rgba(128, 33, 77, .74)
-);
-@include igx-card($colorful-card);
-@include igx-grid($new-grid-theme);
 
 @media screen and (max-width: 800px) {
   .main-panel {   

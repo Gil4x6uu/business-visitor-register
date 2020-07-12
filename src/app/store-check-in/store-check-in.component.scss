@@ -35,8 +35,16 @@ label{
     }
 }
 
+.dialogNewRecord {
+    margin: 10px;
+    padding: 10px;
+    #discontinued {
+    margin-top: 15px; 
+    }
+}
+
 @media screen and (max-width: 800px) {
-        .form-igxButton{
+    .form-igxButton{
         button{
             width:10rem;
             display: none;
@@ -47,6 +55,13 @@ label{
             display: block;
             width:10rem;
         }
+    }
+    
+    .checkInCard{
+        position: relative;
+         left: 50%;
+         transform: translate(-50%, -50%);
+          width:200px; 
     }
 }
 

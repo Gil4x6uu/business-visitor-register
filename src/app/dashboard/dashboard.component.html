@@ -1,14 +1,7 @@
 <div class="wrapper">
   <header class="header">
     <div class="avatar-and-logout">
-      <div class="avatar">
-        <img src={{storeOwner.picture}} class="avatar" class="avatar-img" [igxToggleAction]="toggleRef">
-      </div>
-      <div class="logout">
-        <button class="logout-button" (click)="logout()" igxToggle #toggleRef="toggle">
-          <img src="../../assets/img/Logout.png" />
-        </button>
-      </div>
+      <app-avatar-and-logout [storeOwner]="storeOwner" (logedOut)="onStoreOwnerLoggedOut()"></app-avatar-and-logout>
     </div>
     <div class="title">
       <img src="../../assets/img/logo-dashboard.png" class="logo">
@@ -19,49 +12,10 @@
   </header>
   <div class="main-panel">
     <div class="left-main-panel">
-      <div class="storeOwnerCard">
-        <igx-card class="storDetails">
-          <igx-card-header> Store details </igx-card-header>
-          <igx-card-content>
-            <ul>
-              <li> Store name: {{store.store_name}}</li>
-              <li>Your store ID is: {{store.id}}</li>
-            </ul>
-          </igx-card-content>
-          <igx-card-actions>
-            <div class="igx-card-actions__igroup--start">
-              <span igxButton="icon" igxRipple igxRippleCentered="true">
-                <igx-icon name="add"></igx-icon>
-              </span>
-              <span igxButton="icon" igxRipple igxRippleCentered="true">
-                <igx-icon name="star"></igx-icon>
-              </span>
-            </div>
-          </igx-card-actions>
-        </igx-card>
-      </div>
+      <app-store-owner-card [store] = "store"></app-store-owner-card>
     </div>
     <div class="center-main-panel">
-      <igx-card class="nextVisitor">
-        <igx-card-header> Next visitor </igx-card-header>
-        <igx-card-content *ngIf="nextVisitors">
-          <ul>
-            <li>Full Name: {{nextVisitors.first_name}}, {{nextVisitors.last_name}} </li>
-            <li>Time Of Arrival: {{nextVisitors.time}}</li>
-          </ul>
-        </igx-card-content>
-        <igx-card-content *ngIf="!nextVisitors"> No Visitors at the moment </igx-card-content>
-        <igx-card-actions>
-          <div class="igx-card-actions__igroup--start">
-            <span igxButton="icon" igxRipple igxRippleCentered="true">
-              <igx-icon name="add"></igx-icon>
-            </span>
-            <span igxButton="icon" igxRipple igxRippleCentered="true">
-              <igx-icon name="star"></igx-icon>
-            </span>
-          </div>
-        </igx-card-actions>
-      </igx-card>
+<app-next-visitor [nextVisitors] = "nextVisitors"></app-next-visitor>
     </div>
     <div class="right-main-panel">
       <igx-card #queueMonitor>
@@ -89,16 +43,10 @@
     <button igxButton="raised" (click)="dialogAdd.open()" class="addProdBtn">Add New Visitor</button>
   </div>
   <div class="visitorsGrid">
-   <app-visitors-grid [store] = "store" [visitors]= "visitors"
-   (logoutEvent) = "onLogoutEmit()">
-   </app-visitors-grid>
+    <app-visitors-grid [store]="store" [visitors]="visitors" (logoutEvent)="onLogoutEmit()">
+    </app-visitors-grid>
   </div>
-  
   <footer class="footer">Footer</footer>
-  
-  
-  
-  
 </div>
 <div class="dialogNewRecord">
   <igx-dialog #dialogAdd title="ADD VISITOR" [rightButtonLabel]="'Add'" [leftButtonLabel]="'Cancel'"

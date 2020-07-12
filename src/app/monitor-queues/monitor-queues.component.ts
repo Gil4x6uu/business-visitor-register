@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { IgxGridComponent, IgxListComponent } from 'igniteui-angular';
+import { IgxListComponent } from 'igniteui-angular';
 import { Visitor } from '../models/visitor';
 
 @Component({
